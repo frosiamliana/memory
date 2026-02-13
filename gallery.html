@@ -19,22 +19,18 @@
             background-color: var(--bg-main);
             color: var(--text-main);
             margin: 0; padding: 0;
-            -webkit-font-smoothing: antialiased;
         }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
-
         header { text-align: center; margin-bottom: 40px; }
-        h1 { font-family: 'Helvetica Neue', Arial, sans-serif; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; }
-        .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 10px; font-family: 'Helvetica Neue', Arial, sans-serif; transition: color 0.3s ease; font-size: 1.1em; }
+        h1 { font-family: Arial, sans-serif; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; }
+        .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 10px; font-size: 1.1em; }
         .back-link:hover { color: var(--accent); }
 
-        /* Gallery Grid */
         .gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 15px;
-            min-height: 400px; /* Page a in-switch huna a tlawm deuh loh nan */
         }
 
         .gallery-item {
@@ -49,53 +45,53 @@
 
         .gallery-item:hover img { transform: scale(1.1); filter: brightness(1.1); }
 
-        /* Pagination Buttons */
+        /* Pagination Controls (Main Page) */
         .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-top: 50px;
-            padding-bottom: 30px;
+            display: flex; justify-content: center; align-items: center;
+            gap: 20px; margin-top: 50px; padding-bottom: 30px;
         }
 
         .nav-btn {
-            background-color: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
+            background: transparent; color: var(--accent); border: 1px solid var(--accent);
+            padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: bold;
         }
 
-        .nav-btn:hover:not(:disabled) {
-            background-color: var(--accent);
-            color: var(--bg-main);
-        }
+        .nav-btn:disabled { color: var(--border-light); border-color: var(--border-light); cursor: not-allowed; }
 
-        .nav-btn:disabled {
-            color: var(--border-light);
-            border-color: var(--border-light);
-            cursor: not-allowed;
-        }
-
-        #page-info { font-family: Arial, sans-serif; font-size: 0.9em; color: var(--text-muted); }
-
-        /* Modal / Lightbox */
+        /* Modal / Lightbox Styles */
         .modal {
-            display: none; position: fixed; z-index: 1000; padding-top: 50px;
+            display: none; position: fixed; z-index: 1000;
             left: 0; top: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.95); align-items: center; justify-content: center;
+            background-color: rgba(0, 0, 0, 0.9); align-items: center; justify-content: center;
         }
-        .modal-content { max-width: 95%; max-height: 85vh; object-fit: contain; animation: zoomIn 0.3s ease; }
-        .close { position: absolute; top: 15px; right: 30px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; }
 
-        @keyframes zoomIn { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
+        .modal-content { max-width: 90%; max-height: 80vh; object-fit: contain; animation: zoom 0.3s; }
+
+        .close { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
+
+        /* Modal Navigation Arrows */
+        .modal-nav {
+            position: absolute; top: 50%; width: 100%;
+            display: flex; justify-content: space-between;
+            padding: 0 20px; box-sizing: border-box;
+            pointer-events: none; /* Allows clicking through the div */
+        }
+
+        .arrow {
+            background: rgba(255, 255, 255, 0.1);
+            color: white; border: none; font-size: 30px;
+            padding: 15px 20px; cursor: pointer; border-radius: 50%;
+            pointer-events: auto; /* Makes only the buttons clickable */
+            transition: 0.3s;
+        }
+
+        .arrow:hover { background: var(--accent); color: black; }
+
+        @keyframes zoom { from {transform: scale(0.9)} to {transform: scale(1)} }
 
         @media (max-width: 600px) {
-            .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .gallery { grid-template-columns: repeat(2, 1fr); }
+            .arrow { padding: 10px 15px; font-size: 20px; }
         }
     </style>
 </head>
@@ -103,12 +99,8 @@
 
     <div class="container">
         <a href="index.html" class="back-link">← Kir Leh</a>
-        <header>
-            <h1>Thlalak Hrang Hrangte</h1>
-        </header>
-
+        <header><h1>Thlalak Hrang Hrangte</h1></header>
         <div class="gallery" id="gallery-container"></div>
-
         <div class="pagination">
             <button class="nav-btn" id="prev-btn">Previous</button>
             <span id="page-info">Page 1 of 1</span>
@@ -118,67 +110,79 @@
 
     <div id="imageModal" class="modal">
         <span class="close">&times;</span>
+        <div class="modal-nav">
+            <button class="arrow" id="modal-prev">&#10094;</button>
+            <button class="arrow" id="modal-next">&#10095;</button>
+        </div>
         <img class="modal-content" id="fullImage">
     </div>
 
     <script>
-        // Total thlalak zat (Python script khan he number hi a rawn update zel ang)
-        const totalImages = 100; 
-        const imagesPerPage = 20; // Page khata thlalak lang tur zat
+        const totalImages = 100; // Update this number as needed
+        const imagesPerPage = 20;
         let currentPage = 1;
+        let currentModalIndex = 1;
 
         const galleryContainer = document.getElementById("gallery-container");
-        const pageInfo = document.getElementById("page-info");
-        const prevBtn = document.getElementById("prev-btn");
-        const nextBtn = document.getElementById("next-btn");
         const modal = document.getElementById("imageModal");
         const fullImage = document.getElementById("fullImage");
         const closeBtn = document.querySelector(".close");
 
         function renderGallery(page) {
             galleryContainer.innerHTML = "";
-            
-            // Khawi thlalak atanga khawi thlalak thleng nge lang dawn tih chhutna
             const start = (page - 1) * imagesPerPage + 1;
             const end = Math.min(page * imagesPerPage, totalImages);
 
             for (let i = start; i <= end; i++) {
                 const item = document.createElement("div");
                 item.className = "gallery-item";
-                
                 const img = document.createElement("img");
                 img.src = `gallery/${i}.jpeg`;
-                img.alt = `Thlalak ${i}`;
-                img.loading = "lazy";
-                
-                img.onclick = function() {
-                    modal.style.display = "flex";
-                    fullImage.src = this.src;
-                }
-                
+                img.onclick = () => openModal(i);
                 item.appendChild(img);
                 galleryContainer.appendChild(item);
             }
-
-            // Page info update
-            const totalPages = Math.ceil(totalImages / imagesPerPage);
-            pageInfo.innerText = `Page ${page} of ${totalPages}`;
-
-            // Buttons enable/disable
-            prevBtn.disabled = (page === 1);
-            nextBtn.disabled = (page === totalPages);
-
-            // Scroll to top hret (page switch huna hmuh chian nan)
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            updatePaginationUI();
         }
 
-        prevBtn.onclick = () => { if (currentPage > 1) renderGallery(--currentPage); };
-        nextBtn.onclick = () => { if (currentPage * imagesPerPage < totalImages) renderGallery(++currentPage); };
-        
+        function openModal(index) {
+            currentModalIndex = index;
+            modal.style.display = "flex";
+            fullImage.src = `gallery/${index}.jpeg`;
+        }
+
+        function navigateModal(direction) {
+            currentModalIndex += direction;
+            if (currentModalIndex > totalImages) currentModalIndex = 1;
+            if (currentModalIndex < 1) currentModalIndex = totalImages;
+            fullImage.src = `gallery/${currentModalIndex}.jpeg`;
+        }
+
+        document.getElementById("modal-prev").onclick = (e) => { e.stopPropagation(); navigateModal(-1); };
+        document.getElementById("modal-next").onclick = (e) => { e.stopPropagation(); navigateModal(1); };
+
+        function updatePaginationUI() {
+            const totalPages = Math.ceil(totalImages / imagesPerPage);
+            document.getElementById("page-info").innerText = `Page ${currentPage} of ${totalPages}`;
+            document.getElementById("prev-btn").disabled = (currentPage === 1);
+            document.getElementById("next-btn").disabled = (currentPage === totalPages);
+        }
+
+        document.getElementById("prev-btn").onclick = () => { if (currentPage > 1) renderGallery(--currentPage); window.scrollTo(0,0); };
+        document.getElementById("next-btn").onclick = () => { if (currentPage < Math.ceil(totalImages/imagesPerPage)) renderGallery(++currentPage); window.scrollTo(0,0); };
+
         closeBtn.onclick = () => modal.style.display = "none";
         modal.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
 
-        // A vawikhatna atan render rawh le
+        // Keyboard Support
+        document.onkeydown = (e) => {
+            if (modal.style.display === "flex") {
+                if (e.key === "ArrowLeft") navigateModal(-1);
+                if (e.key === "ArrowRight") navigateModal(1);
+                if (e.key === "Escape") modal.style.display = "none";
+            }
+        };
+
         renderGallery(currentPage);
     </script>
 </body>
