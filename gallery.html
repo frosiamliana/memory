@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery: F. Rosiamliana</title>
+    <style>
+        :root {
+            --bg-main: #121212;
+            --bg-card: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --accent: #d4af37;
+            --border-light: #333333;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            margin: 0; padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
+
+        header { text-align: center; margin-bottom: 40px; }
+        h1 { font-family: 'Helvetica Neue', Arial, sans-serif; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; }
+        .back-link { display: inline-block; color: var(--text-muted); text-decoration: none; margin-bottom: 10px; font-family: 'Helvetica Neue', Arial, sans-serif; transition: color 0.3s ease; font-size: 1.1em; }
+        .back-link:hover { color: var(--accent); }
+
+        /* Gallery Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            min-height: 400px; /* Page a in-switch huna a tlawm deuh loh nan */
+        }
+
+        .gallery-item {
+            overflow: hidden; border-radius: 8px; border: 1px solid var(--border-light);
+            cursor: pointer; background-color: var(--bg-card); aspect-ratio: 1 / 1;
+        }
+
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.4s ease; filter: brightness(0.9);
+        }
+
+        .gallery-item:hover img { transform: scale(1.1); filter: brightness(1.1); }
+
+        /* Pagination Buttons */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 50px;
+            padding-bottom: 30px;
+        }
+
+        .nav-btn {
+            background-color: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background-color: var(--accent);
+            color: var(--bg-main);
+        }
+
+        .nav-btn:disabled {
+            color: var(--border-light);
+            border-color: var(--border-light);
+            cursor: not-allowed;
+        }
+
+        #page-info { font-family: Arial, sans-serif; font-size: 0.9em; color: var(--text-muted); }
+
+        /* Modal / Lightbox */
+        .modal {
+            display: none; position: fixed; z-index: 1000; padding-top: 50px;
+            left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.95); align-items: center; justify-content: center;
+        }
+        .modal-content { max-width: 95%; max-height: 85vh; object-fit: contain; animation: zoomIn 0.3s ease; }
+        .close { position: absolute; top: 15px; right: 30px; color: #f1f1f1; font-size: 40px; font-weight: bold; cursor: pointer; }
+
+        @keyframes zoomIn { from {transform: scale(0.8); opacity: 0;} to {transform: scale(1); opacity: 1;} }
+
+        @media (max-width: 600px) {
+            .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <a href="index.html" class="back-link">← Kir Leh</a>
+        <header>
+            <h1>Thlalak Hrang Hrangte</h1>
+        </header>
+
+        <div class="gallery" id="gallery-container"></div>
+
+        <div class="pagination">
+            <button class="nav-btn" id="prev-btn">Previous</button>
+            <span id="page-info">Page 1 of 1</span>
+            <button class="nav-btn" id="next-btn">Next</button>
+        </div>
+    </div>
+
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="fullImage">
+    </div>
+
+    <script>
+        // Total thlalak zat (Python script khan he number hi a rawn update zel ang)
+        const totalImages = 100; 
+        const imagesPerPage = 20; // Page khata thlalak lang tur zat
+        let currentPage = 1;
+
+        const galleryContainer = document.getElementById("gallery-container");
+        const pageInfo = document.getElementById("page-info");
+        const prevBtn = document.getElementById("prev-btn");
+        const nextBtn = document.getElementById("next-btn");
+        const modal = document.getElementById("imageModal");
+        const fullImage = document.getElementById("fullImage");
+        const closeBtn = document.querySelector(".close");
+
+        function renderGallery(page) {
+            galleryContainer.innerHTML = "";
+            
+            // Khawi thlalak atanga khawi thlalak thleng nge lang dawn tih chhutna
+            const start = (page - 1) * imagesPerPage + 1;
+            const end = Math.min(page * imagesPerPage, totalImages);
+
+            for (let i = start; i <= end; i++) {
+                const item = document.createElement("div");
+                item.className = "gallery-item";
+                
+                const img = document.createElement("img");
+                img.src = `gallery/${i}.jpeg`;
+                img.alt = `Thlalak ${i}`;
+                img.loading = "lazy";
+                
+                img.onclick = function() {
+                    modal.style.display = "flex";
+                    fullImage.src = this.src;
+                }
+                
+                item.appendChild(img);
+                galleryContainer.appendChild(item);
+            }
+
+            // Page info update
+            const totalPages = Math.ceil(totalImages / imagesPerPage);
+            pageInfo.innerText = `Page ${page} of ${totalPages}`;
+
+            // Buttons enable/disable
+            prevBtn.disabled = (page === 1);
+            nextBtn.disabled = (page === totalPages);
+
+            // Scroll to top hret (page switch huna hmuh chian nan)
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        prevBtn.onclick = () => { if (currentPage > 1) renderGallery(--currentPage); };
+        nextBtn.onclick = () => { if (currentPage * imagesPerPage < totalImages) renderGallery(++currentPage); };
+        
+        closeBtn.onclick = () => modal.style.display = "none";
+        modal.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
+
+        // A vawikhatna atan render rawh le
+        renderGallery(currentPage);
+    </script>
+</body>
+</html>

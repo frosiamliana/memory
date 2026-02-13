@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F. Rosiamliana (1953-2021) - Memorial Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #0f0f0f;
+            --bg-card: #1a1a1a;
+            --accent: #d4af37;
+            --text-main: #e8e8e8;
+            --text-muted: #b0b0b0;
+            --border-color: #2a2a2a;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section - Tightened up */
+        .hero {
+            min-height: 60vh; /* Screen chanve ai hretin a tihniam */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(15, 15, 15, 0.8), rgba(15, 15, 15, 0.9)), 
+                        url('https://www.transparenttextures.com/patterns/dark-matter.png');
+            padding: 40px 20px;
+        }
+
+        .hero-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            padding: 8px;
+            margin-bottom: 20px;
+            object-fit: cover;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--accent);
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .dates {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .btn-gallery {
+            padding: 10px 30px;
+            background-color: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.4s;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+        .btn-gallery:hover {
+            background-color: var(--accent);
+            color: var(--bg-main);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Content Area - Adjusted Spacing */
+        .content-section {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 30px 20px 60px 20px; /* Top padding tihniam a ni */
+        }
+
+        .story-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .story-card {
+            background-color: var(--bg-card);
+            padding: 40px;
+            border-radius: 12px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .story-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 5rem;
+            color: var(--accent);
+            opacity: 0.1;
+        }
+
+        .story-card p {
+            font-size: 1.1rem;
+            color: #d1d1d1;
+            margin-bottom: 20px;
+            text-align: justify;
+            position: relative;
+            z-index: 1;
+        }
+
+        .author-info {
+            text-align: right;
+            border-top: 1px solid var(--border-color);
+            padding-top: 15px;
+            margin-top: 20px;
+        }
+
+        .author-name {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 10px 0;
+            color: var(--accent);
+            font-size: 1.2rem;
+            opacity: 0.4;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            background: #0a0a0a;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .hero { min-height: 50vh; padding: 30px 15px; }
+            .story-card { padding: 30px 20px; }
+            .story-card p { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <img src="main.jpeg" alt="F. Rosiamliana" class="hero-img">
+        <h1>F. Rosiamliana</h1>
+        <div class="dates">1953 — 2021</div>
+        <div class="btn-container">
+            <a href="gallery.html" class="btn-gallery">PHOTO GALLERY</a>
+        </div>
+    </section>
+
+    <div class="content-section">
+        <div class="story-container">
+            
+            <div class="story-card reveal">
+                <p>F.Rosiamliana hi a pian leh murna chu Mizoram khaw lar tak Ngopa khua a ni a, A pa Aizika niin a nu chu Khuangliani a ni. Amah hi mi ngawichawi, tawng duah lo, a thil vei tawh chu tihhlawhtlin tum tlat mi a ni. Kum 1994 khan Aizawl DIET-ah kan training tlang a, a felin a entawn tlak hle thin a ni. Kan thil zir hrang hrang te a thiamin a la thutak hle thin a, a thiamthei pawl a ni thin. WE Teacher Association kan din tirh pawh khan member ni ve lo te a veiin member-a awm ngei tura fuihtu ber a ni thin. Association -ah a phurin fee khawn nikhuaah pawh a thawh hmasaah a tang zat zat thei zel a, Association tana mi hlu tak a ni.</p>
+                <p>Thiam thil a ngahin a kut a themthiam hle a, Tuizem khawr leh bawlhhlawhruhna, sikri thlengin a khawr thiam a, a hnen atang hian thil tamtak ka zir chhuak a ni. Tin, Insak pawh a thiam hle mai a, Training laia inrel dawna Angle lak dan te pawh a thiam hle. A thiltih reng rengah khan duhtuina a tel zel a, zir tur tamtak min hnutchhiah reng a ni. A chanchin sawi tur tam tak a awm ang a, sawi sen pawh a ni lo ang. A nupui Pi Ralziki keini Association tan chuan mi hlu tak a ni a, kan hlawh pun kan nawr lai pawh khan a kalhmang leh tih dan tur tam tak min hrilhin min buaibui nasa hle a, hotute hnena lehkha kan submit hrang hrang pawh min bawhzui sakin theihtawp chhuahin keini pawl tan hian a theihna a hmang nasa hle a, a pasal leh a thawhpuite tan a inpekna hi a fakawm hle.</p>
+                <div class="author-info">
+                    <span class="author-name">— J. Zatawna</span>
+                </div>
+            </div>
+
+            <div class="divider reveal">✦ ✦ ✦</div>
+
+            <div class="story-card reveal">
+                <p>Pu F. Rosiamliana hi 15.02.1995 ah Govt. middle School Dawrpui Vengthar ah hian Craft Teacher (W.E Teacher) in a rawn lut a. Amah hi pa tha tak, mi kawm nuam leh tawhpui nuam tak ani a, a thawhpui te pawh in kan ngaina in tun thlengin a chanchin hi kan la sawi thin ani.</p>
+                <p>Pu Siama hi Craft teacher anih angin a hna hi a tlinin a tui pui em em a, naupang te thiamna hai chhuah sak kawngah a thawh hlawk thin hle ani. Sikul naupangte hmeichhe lam la phiar leh buh thap/buh thlei thlengin a zirtir a , mipa te pawh thiam hnang tah chi hrang hrang a zirtir thin ani. A dam phawt chuan sikul hi a thulh ngai lova, a hun takah thlengin ban hun hma in a chhuak ngai lo. Sikul naupangte discipline vawn chungchangah a duh fir thei hle. Naupang tla dah deuh leh in thlahdah te a hre thei hle a, zilh hauna pekna kawngah thahnem a ngai thei hle ani. Sikul building leh a vel vawnfai chungchangah naupangte a kaihruai tha in, amah pawh h hian hmanrua leh bungraw chhia thawmthat chungchangah a thawh hlawk thei le ani. Sikul bungrua a chhiatin pawn lam mi rawih ngai loin a mawhah lain aman a buaipui vek thin ani.</p>
+                <p>Pu Siama hian infiamna lam te pawh a ngaina hle a, zonal sports neih dawn te hian naupangte han practice puiah thahnem a ngai thin em em a, naupang ti tha duh lo deuh leh zawi deuhte a ngai thei lo hle thin. Sikul dang nen kan han inkhelh nikhua ten naupang te au phurtu ber ani thin a, kan chak nikhua pawh a nuam ti ber leh lawm thiam ber ani. Thil thiam a ngah em em a, sikul hian vawk han vulh chang te pawh kan nei thin a, a ser hun a thlen pawhin amah in a talh in a ser vek thin ani. Pu Siama hi hun rei tak chhhung Govt. Middle School, Dawrpui Vengthar ah hian a thawk a, zirtirtu lo awm thar te a lo lawm thiam in min ti tlangnel vat thin a, a awm thar te pawh in kan ngaina in a bul a awm nuam kan ti em em thin ani. Hun enga maw chen kan thawh ho hnu in taksa lamah harsatnain a tlak buak tak avangin kan thawk ho zui rei thei ta lova , kan la ngaih em em laiin chatuan ram min pan san ta a. Kan thinlungah hian kan thawhpui Pu F Rosiamliana hi a thi tawh ngai dawn lova, vawin ni thleng hian a chanchin kan la sawi a, a sulhnu kan la chhui zel ani.</p>
+                <div class="author-info">
+                    <span class="author-name">— Colleagues</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>Hriatrengna Webpage - F. Rosiamliana (1953-2021)</p>
+    </footer>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+
+</body>
+</html>
