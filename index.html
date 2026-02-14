@@ -17,6 +17,11 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
+        /* NEW: Smooth scrolling for the anchor link */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg-main);
@@ -42,7 +47,7 @@
             position: relative;
             width: 180px;
             height: 180px;
-            margin-bottom: 30px; /* Thlalak leh a hming inkar ka tithawl hlek */
+            margin-bottom: 30px;
             border-radius: 50%;
             z-index: 2;
         }
@@ -78,43 +83,43 @@
             z-index: 1;
         }
 
-        /* NEW: A hming lian leh mawi zawk */
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 4.5rem; /* A let deuhthaw in a lian ta */
+            font-size: 4.5rem;
             font-weight: 700;
             letter-spacing: 4px;
             margin-bottom: 10px;
             text-transform: uppercase;
             
-            /* Gold Gradient Effect */
             background: linear-gradient(to right, #e8d07a, #d4af37, #997a15, #d4af37, #e8d07a);
             background-size: 200% auto;
             color: var(--accent);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             
-            /* Glowing Shadow */
             filter: drop-shadow(0px 8px 16px rgba(212, 175, 55, 0.25));
-            
-            /* Shine Animation */
             animation: shine 6s linear infinite;
         }
 
-        /* Shine effect keyframe */
         @keyframes shine {
-            to {
-                background-position: 200% center;
-            }
+            to { background-position: 200% center; }
         }
 
         .dates {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem; /* Date pawh ka tilian hlek */
+            font-size: 1.4rem;
             font-style: italic;
             color: var(--text-muted);
             margin-bottom: 35px;
             letter-spacing: 2px;
+        }
+
+        /* NEW: Flexbox container for buttons */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap; /* Allows buttons to stack cleanly on very small phone screens */
         }
 
         .btn-gallery {
@@ -143,7 +148,7 @@
         .content-section {
             max-width: 850px;
             margin: 0 auto;
-            padding: 30px 20px 60px 20px;
+            padding: 50px 20px 60px 20px;
         }
 
         .story-container {
@@ -222,12 +227,13 @@
             transform: translateY(0);
         }
 
-        /* Mobile Adjustments */
         @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; letter-spacing: 2px; } /* Mobile a buai loh nan size set a ni */
+            h1 { font-size: 2.5rem; letter-spacing: 2px; }
             .hero { min-height: 50vh; padding: 40px 15px; }
             .story-card { padding: 30px 20px; }
             .story-card p { text-align: left; }
+            .btn-group { gap: 10px; }
+            .btn-gallery { padding: 10px 25px; font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -240,12 +246,14 @@
         
         <h1>F. Rosiamliana</h1>
         <div class="dates">1953 — 2021</div>
-        <div class="btn-container">
+        
+        <div class="btn-group">
+            <a href="#chanchin" class="btn-gallery">Chanchin Tlangpui</a>
             <a href="gallery.html" class="btn-gallery">Thlalak Enna</a>
         </div>
     </section>
 
-    <div class="content-section">
+    <div class="content-section" id="chanchin">
         <div class="story-container">
             
             <div class="story-card reveal">
