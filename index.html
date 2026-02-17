@@ -16,8 +16,7 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        /* NEW: Smooth scrolling for the anchor link */
+        
         html {
             scroll-behavior: smooth;
         }
@@ -78,9 +77,20 @@
             padding: 8px;
             background-color: var(--bg-main);
             object-fit: cover;
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
             position: relative;
             z-index: 1;
+            /* Added breathing glow animation */
+            animation: pulseGlow 3s ease-in-out infinite alternate;
+        }
+
+        /* Keyframes for the image glow */
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), 0 0 40px rgba(212, 175, 55, 0.1);
+            }
+            100% {
+                box-shadow: 0 0 40px rgba(212, 175, 55, 0.8), 0 0 80px rgba(212, 175, 55, 0.4);
+            }
         }
 
         h1 {
@@ -90,19 +100,24 @@
             letter-spacing: 4px;
             margin-bottom: 10px;
             text-transform: uppercase;
-            
             background: linear-gradient(to right, #e8d07a, #d4af37, #997a15, #d4af37, #e8d07a);
             background-size: 200% auto;
             color: var(--accent);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            
             filter: drop-shadow(0px 8px 16px rgba(212, 175, 55, 0.25));
-            animation: shine 6s linear infinite;
+            /* Combined shine and fade-up animations */
+            animation: shine 6s linear infinite, fadeUp 1.5s ease-out forwards;
         }
 
         @keyframes shine {
             to { background-position: 200% center; }
+        }
+
+        /* Keyframes for the title fade-in */
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .dates {
@@ -114,12 +129,11 @@
             letter-spacing: 2px;
         }
 
-        /* NEW: Flexbox container for buttons */
         .btn-group {
             display: flex;
             gap: 15px;
             justify-content: center;
-            flex-wrap: wrap; /* Allows buttons to stack cleanly on very small phone screens */
+            flex-wrap: wrap;
         }
 
         .btn-gallery {
@@ -142,6 +156,12 @@
             color: var(--bg-main);
             box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
             transform: translateY(-2px);
+        }
+
+        /* Accessibility focus state */
+        .btn-gallery:focus {
+            outline: 2px dashed var(--accent);
+            outline-offset: 4px;
         }
 
         /* Content Area */
@@ -180,7 +200,9 @@
         .story-card p {
             font-size: 1.1rem;
             color: #d1d1d1;
-            margin-bottom: 20px;
+            /* Updated spacing for better readability */
+            margin-bottom: 25px; 
+            line-height: 1.9;
             text-align: justify;
             position: relative;
             z-index: 1;
@@ -222,11 +244,13 @@
             transform: translateY(30px);
             transition: all 0.8s ease-out;
         }
+        
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
 
+        /* Mobile adjustments */
         @media (max-width: 600px) {
             h1 { font-size: 2.5rem; letter-spacing: 2px; }
             .hero { min-height: 50vh; padding: 40px 15px; }
@@ -234,6 +258,13 @@
             .story-card p { text-align: left; }
             .btn-group { gap: 10px; }
             .btn-gallery { padding: 10px 25px; font-size: 0.85rem; }
+            
+            /* Adjusted quote mark for mobile screens */
+            .story-card::before {
+                top: 5px;
+                left: 10px;
+                font-size: 4rem;
+            }
         }
     </style>
 </head>
@@ -285,18 +316,20 @@
     <script>
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
+
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
                 var elementVisible = 100;
+
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
                 }
             }
         }
+
         window.addEventListener("scroll", reveal);
         reveal();
     </script>
-
 </body>
 </html>
