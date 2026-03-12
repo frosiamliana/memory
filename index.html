@@ -4,332 +4,903 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>In Loving Memory of F. Rosiamliana (1953-2021)</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-main: #0f0f0f;
-            --bg-card: #1a1a1a;
-            --accent: #d4af37;
-            --text-main: #e8e8e8;
-            --text-muted: #b0b0b0;
-            --border-color: #2a2a2a;
+            --bg-deep: #050505;
+            --bg-card: #121212;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-dark: #aa8c2c;
+            --text-main: #f0f0f0;
+            --text-dim: #999999;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.06);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-main);
+            background-color: var(--bg-deep);
             color: var(--text-main);
             line-height: 1.8;
             overflow-x: hidden;
+            background-image: radial-gradient(circle at top center, #151515 0%, var(--bg-deep) 70%);
         }
 
-        /* Hero Section */
+        /* --- 1. HERO & PROLOGUE SECTION --- */
         .hero {
-            min-height: 60vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(rgba(15, 15, 15, 0.8), rgba(15, 15, 15, 0.9)), 
-                        url('https://www.transparenttextures.com/patterns/dark-matter.png');
-            padding: 40px 20px;
+            padding: 60px 20px;
+            position: relative;
         }
 
-        .hero-img-container {
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.2;
+            z-index: 0;
+            animation: drift 150s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes drift { 100% { background-position: 2000px 2000px; } }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .hero-profile {
             position: relative;
             width: 180px;
             height: 180px;
             margin-bottom: 30px;
             border-radius: 50%;
-            z-index: 2;
         }
 
-        .hero-img-container::before {
+        .hero-profile::before {
             content: '';
             position: absolute;
-            top: -15px;
-            left: -15px;
-            right: -15px;
-            bottom: -15px;
-            border: 1.5px dashed var(--accent);
+            top: -15px; left: -15px; right: -15px; bottom: -15px;
+            border: 1px solid transparent;
+            border-top-color: var(--gold);
+            border-bottom-color: var(--gold-dark);
             border-radius: 50%;
-            animation: spin 30s linear infinite;
+            animation: spin 12s linear infinite;
             opacity: 0.6;
-            z-index: -1;
         }
 
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
         .hero-img {
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             border-radius: 50%;
-            border: 3px solid var(--accent);
-            padding: 8px;
-            background-color: var(--bg-main);
+            border: 3px solid var(--gold);
+            padding: 6px;
+            background-color: var(--bg-deep);
             object-fit: cover;
-            position: relative;
-            z-index: 1;
-            /* Added breathing glow animation */
-            animation: pulseGlow 3s ease-in-out infinite alternate;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.15);
         }
 
-        /* Keyframes for the image glow */
-        @keyframes pulseGlow {
-            0% {
-                box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), 0 0 40px rgba(212, 175, 55, 0.1);
-            }
-            100% {
-                box-shadow: 0 0 40px rgba(212, 175, 55, 0.8), 0 0 80px rgba(212, 175, 55, 0.4);
-            }
-        }
-
-        h1 {
+        .title {
             font-family: 'Playfair Display', serif;
             font-size: 4.5rem;
             font-weight: 700;
             letter-spacing: 4px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             text-transform: uppercase;
-            background: linear-gradient(to right, #e8d07a, #d4af37, #997a15, #d4af37, #e8d07a);
+            background: linear-gradient(to right, var(--gold-light), var(--gold), var(--gold-dark), var(--gold), var(--gold-light));
             background-size: 200% auto;
-            color: var(--accent);
+            color: var(--gold);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 8px 16px rgba(212, 175, 55, 0.25));
-            /* Combined shine and fade-up animations */
-            animation: shine 6s linear infinite, fadeUp 1.5s ease-out forwards;
+            animation: shine 8s linear infinite;
+            text-shadow: 0px 10px 30px rgba(0,0,0,0.8);
         }
 
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
-
-        /* Keyframes for the title fade-in */
-        @keyframes fadeUp {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes shine { to { background-position: 200% center; } }
 
         .dates {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
             font-style: italic;
-            color: var(--text-muted);
-            margin-bottom: 35px;
-            letter-spacing: 2px;
+            color: var(--text-dim);
+            margin-bottom: 40px;
+            letter-spacing: 4px;
         }
 
-        .btn-group {
+        .btn-container {
             display: flex;
-            gap: 15px;
-            justify-content: center;
+            gap: 20px;
+            margin-bottom: 60px;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
-        .btn-gallery {
-            padding: 12px 35px;
-            background-color: transparent;
-            color: var(--accent);
-            border: 2px solid var(--accent);
+        .btn-action {
+            padding: 12px 40px;
+            background: rgba(20, 20, 20, 0.5);
+            color: var(--gold);
+            border: 1px solid var(--gold-dark);
             text-decoration: none;
-            font-weight: 600;
             border-radius: 50px;
-            transition: all 0.4s;
-            display: inline-block;
             font-size: 0.95rem;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            backdrop-filter: blur(8px);
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        
+        .btn-action:hover {
+            background: var(--gold);
+            color: var(--bg-deep);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            transform: translateY(-3px);
+            font-weight: 600;
+        }
+
+        /* Prologue Section */
+        .prologue-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            width: 100%;
+        }
+
+        .prologue-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        .prologue-poem {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            line-height: 2;
+            color: #dfdfdf;
+            font-style: italic;
+        }
+
+        .prologue-poem p { margin-bottom: 25px; }
+        .prologue-poem p:last-child { margin-bottom: 0; }
+
+        .prologue-author {
+            margin-top: 40px;
+            font-family: 'Playfair Display', serif;
+            color: var(--gold-dark);
+            font-size: 1.1rem;
+            font-style: italic;
             letter-spacing: 1px;
         }
         
-        .btn-gallery:hover {
-            background-color: var(--accent);
-            color: var(--bg-main);
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
-            transform: translateY(-2px);
+        .prologue-author span {
+            display: block;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-style: normal;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 5px;
         }
 
-        /* Accessibility focus state */
-        .btn-gallery:focus {
-            outline: 2px dashed var(--accent);
-            outline-offset: 4px;
-        }
-
-        /* Content Area */
-        .content-section {
-            max-width: 850px;
+        /* --- 2. BOOK & INDEX LAYOUT --- */
+        .memoir-wrapper {
+            max-width: 1350px;
             margin: 0 auto;
-            padding: 50px 20px 60px 20px;
+            padding: 80px 20px;
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
         }
 
-        .story-container {
+        .glass-sidebar {
+            flex: 0 0 320px;
+            position: sticky;
+            top: 40px;
+            max-height: calc(100vh - 80px); 
+            padding-right: 15px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) transparent;
+        }
+
+        .glass-sidebar::-webkit-scrollbar { width: 3px; }
+        .glass-sidebar::-webkit-scrollbar-track { background: transparent; }
+        .glass-sidebar::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+
+        .sidebar-header {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 1.3rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .index-list {
+            list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 10px; 
         }
 
-        .story-card {
-            background-color: var(--bg-card);
-            padding: 40px;
+        .glass-tile {
+            display: block;
+            padding: 12px 18px; 
+            text-decoration: none;
+            color: var(--text-main);
+            position: relative;
+            overflow: hidden;
             border-radius: 12px;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
         }
 
-        .story-card::before {
-            content: '"';
+        .glass-tile::after {
+            content: '';
             position: absolute;
-            top: 10px;
-            left: 20px;
-            font-family: 'Playfair Display', serif;
-            font-size: 5rem;
-            color: var(--accent);
-            opacity: 0.1;
-        }
-
-        .story-card p {
-            font-size: 1.1rem;
-            color: #d1d1d1;
-            /* Updated spacing for better readability */
-            margin-bottom: 25px; 
-            line-height: 1.9;
-            text-align: justify;
-            position: relative;
+            top: 0; left: -150%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-25deg);
+            transition: 0.6s ease;
             z-index: 1;
         }
 
-        .author-info {
-            text-align: right;
-            border-top: 1px solid var(--border-color);
-            padding-top: 15px;
-            margin-top: 20px;
+        .glass-tile:hover::after { left: 200%; }
+
+        .glass-tile:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            border-left: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 175, 55, 0.1);
+        }
+
+        .tile-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem; 
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        .tile-author {
+            display: block;
+            font-size: 0.75rem; 
+            font-style: italic;
+            color: var(--gold);
+            opacity: 0.8;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- 3. THE BOOK PAGES (CONTENT) --- */
+        .content-feed {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .page-entry {
+            background: linear-gradient(180deg, #131313 0%, #0a0a0a 100%);
+            padding: 50px 60px;
+            border-radius: 4px 16px 16px 4px;
+            position: relative;
+            box-shadow: -12px 0 20px rgba(0,0,0,0.6), 0 20px 40px rgba(0,0,0,0.5);
+            border-right: 1px solid #1a1a1a;
+            border-top: 1px solid #1a1a1a;
+            
+            scroll-margin-top: 40px; 
+            
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .page-entry:target, .page-entry.visible {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+        }
+
+        .page-entry::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; bottom: 0; width: 40px;
+            background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(255,255,255,0.03) 100%);
+            border-radius: 4px 0 0 4px;
+            pointer-events: none;
+        }
+
+        .entry-heading {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            padding-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .page-entry > p:first-of-type::first-letter {
+            font-family: 'Playfair Display', serif;
+            float: left;
+            font-size: 4rem;
+            line-height: 0.85;
+            padding-right: 10px;
+            padding-top: 6px;
+            color: var(--gold);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+        }
+
+        .page-entry p, .page-entry ol {
+            font-size: 1.05rem;
+            color: #d0d0d0;
+            margin-bottom: 25px; 
+            line-height: 2.1;
+            text-align: justify;
+            padding-left: 10px;
+        }
+
+        .page-entry ol { margin-left: 40px; }
+
+        .author-block {
+            margin-top: 40px;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            position: relative;
+        }
+
+        .author-block::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 120px;
+            height: 1px;
+            background: linear-gradient(to left, var(--gold), transparent);
         }
 
         .author-name {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            color: var(--accent);
+            color: var(--gold);
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            margin-bottom: 3px;
         }
 
-        .divider {
+        .author-address {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .page-ornament {
             text-align: center;
-            margin: 10px 0;
-            color: var(--accent);
+            color: var(--gold-dark);
             font-size: 1.2rem;
             opacity: 0.4;
+            margin-top: 30px;
+            padding-left: 20px;
+        }
+
+        /* Back to top button for mobile */
+        .back-to-index {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .back-to-index a {
+            display: inline-block;
+            color: var(--gold-dark);
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 30px;
+            transition: background 0.3s;
         }
 
         footer {
             text-align: center;
             padding: 40px 20px;
-            color: var(--text-muted);
+            color: var(--text-dim);
             font-size: 0.85rem;
-            background: #0a0a0a;
+            background: #000;
+            border-top: 1px solid #111;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 2px;
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile adjustments */
-        @media (max-width: 600px) {
-            h1 { font-size: 2.5rem; letter-spacing: 2px; }
-            .hero { min-height: 50vh; padding: 40px 15px; }
-            .story-card { padding: 30px 20px; }
-            .story-card p { text-align: left; }
-            .btn-group { gap: 10px; }
-            .btn-gallery { padding: 10px 25px; font-size: 0.85rem; }
+        /* --- MOBILE RESPONSIVENESS (VERTICAL LIST OPTIMIZED) --- */
+        @media (max-width: 950px) {
+            .title { font-size: 2.5rem; letter-spacing: 2px; }
+            .dates { font-size: 1.2rem; }
+            .hero { padding: 40px 15px; }
             
-            /* Adjusted quote mark for mobile screens */
-            .story-card::before {
-                top: 5px;
-                left: 10px;
-                font-size: 4rem;
+            .prologue-section { padding: 30px 20px; }
+            .prologue-poem { font-size: 1rem; }
+
+            .memoir-wrapper {
+                flex-direction: column;
+                padding: 40px 15px; 
+                gap: 40px;
             }
+
+            /* Mobile Table of Contents - Vertical layout */
+            .glass-sidebar {
+                flex: none;
+                width: 100%;
+                position: relative; /* Removes sticky to free up reading space */
+                top: 0;
+                padding: 0;
+                max-height: none;
+            }
+
+            .sidebar-header {
+                font-size: 1.5rem;
+                border-bottom: 1px dashed rgba(212, 175, 55, 0.3);
+                margin-bottom: 25px;
+            }
+
+            .index-list {
+                flex-direction: column; /* Stacked naturally */
+                gap: 12px;
+            }
+
+            .glass-tile {
+                padding: 15px 20px;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .tile-title {
+                font-size: 1.05rem;
+            }
+
+            .tile-author { 
+                font-size: 0.85rem; 
+            }
+
+            /* Content formatting for mobile */
+            .page-entry {
+                padding: 30px 20px;
+                border-radius: 12px;
+                border-left: 1px solid #1a1a1a;
+                scroll-margin-top: 30px; 
+            }
+            
+            .page-entry::before { display: none; }
+            .entry-heading { font-size: 1.6rem; margin-bottom: 20px; padding-left: 0; }
+            .page-entry p, .page-entry ol { padding-left: 0; font-size: 1rem; }
+            .page-ornament { padding-left: 0; }
+            .page-entry > p:first-of-type::first-letter { font-size: 3rem; }
+
+            /* Show 'Back to top' on mobile */
+            .back-to-index { display: block; }
         }
     </style>
 </head>
 <body>
 
     <section class="hero">
-        <div class="hero-img-container">
-            <img src="main.jpeg" alt="F. Rosiamliana" class="hero-img">
-        </div>
-        
-        <h1>F. Rosiamliana</h1>
-        <div class="dates">1953 — 2021</div>
-        
-        <div class="btn-group">
-            <a href="#chanchin" class="btn-gallery">Chanchin Tlangpui</a>
-            <a href="gallery.html" class="btn-gallery">Thlalak Enna</a>
+        <div class="hero-content">
+            <div class="hero-profile">
+                <img src="main.jpeg" alt="F. Rosiamliana" class="hero-img">
+            </div>
+            <h1 class="title">F. Rosiamliana</h1>
+            <div class="dates">1953 — 2021</div>
+            
+            <div class="btn-container">
+                <a href="#chanchin" class="btn-action nav-link">Chanchin Ziahna</a>
+                <a href="gallery.html" class="btn-action">Thlalak Enna</a>
+            </div>
+
+            <div class="prologue-section">
+                <h2 class="prologue-title">Kan Vanhnunpui</h2>
+                <div class="prologue-poem">
+                    <p>
+                        Vawiin kan van ngaih a zual mang e,<br>
+                        Awmni kan kham rual kan khawm i pual;<br>
+                        Chul lo i sakhming kan lam bang lo,<br>
+                        Kan chhung puipa kan va ngai che em.
+                    </p>
+                    <p>
+                        I lei ro thai leh hrai tan i hlu,<br>
+                        Lei nun zekim mawi par ang vulin;<br>
+                        Hring thuam hlipa van siangpui lawi chu,<br>
+                        Ngaih i zual mang e kan vanhnunpui.
+                    </p>
+                    <p>
+                        Sakruang ral rauthla tak chang mah la,<br>
+                        Min zuk thlir la hringlam hnuchhawn hi;<br>
+                        I tan thu tin kan chhiah parmawi nen,<br>
+                        Nghilh loh lung kan tiang i zalnaah.
+                    </p>
+                    <p>
+                        I hlimthla a chuang biak mi chhawn lo,<br>
+                        Van khua chang a chatuan nun mawm chuan;<br>
+                        Min ngai lova in lenna zionah,<br>
+                        Chhandamtu fakin i leng tawh si.
+                    </p>
+                    <p>
+                        Hmangaihte lenna zion thar mawi,<br>
+                        I ngaiin lunglen kan bang thei lo;<br>
+                        Thinlung khawhar lusun min hnem la,<br>
+                        Zaiin kan awi chhandamtu fakin.
+                    </p>
+                </div>
+                <div class="prologue-author">
+                    Lalbiakzami Pachuau
+                    <span>Tuirial Airfield</span>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <div class="content-section" id="chanchin">
-        <div class="story-container">
+    <div class="memoir-wrapper" id="chanchin">
+        
+        <aside class="glass-sidebar">
+            <h2 class="sidebar-header">Chanchin Ziahna</h2>
+            <ul class="index-list">
+                <li><a href="#story-1" class="glass-tile nav-link">
+                    <div class="tile-title">Ka Pasal F. Rosiamliana</div>
+                    <span class="tile-author">R. Ralziki</span>
+                </a></li>
+                <li><a href="#story-2" class="glass-tile nav-link">
+                    <div class="tile-title">F. Rosiamliana Nghilloh Nan</div>
+                    <span class="tile-author">K. Darthantluanga</span>
+                </a></li>
+                <li><a href="#story-3" class="glass-tile nav-link">
+                    <div class="tile-title">Ka U F. Rosiamliana</div>
+                    <span class="tile-author">F. Lalrinsangi</span>
+                </a></li>
+                <li><a href="#story-4" class="glass-tile nav-link">
+                    <div class="tile-title">F. Rosiamliana Ka Hriat Dan</div>
+                    <span class="tile-author">JC. Dailova</span>
+                </a></li>
+                <li><a href="#story-5" class="glass-tile nav-link">
+                    <div class="tile-title">Ka U Siama Kha Aw</div>
+                    <span class="tile-author">F. Lalhmingmawia</span>
+                </a></li>
+                <li><a href="#story-6" class="glass-tile nav-link">
+                    <div class="tile-title">Kan Thawhpui Sir Siama</div>
+                    <span class="tile-author">Colleagues</span>
+                </a></li>
+                <li><a href="#story-7" class="glass-tile nav-link">
+                    <div class="tile-title">F. Rosiamliana Chanchin</div>
+                    <span class="tile-author">J. Zatawna</span>
+                </a></li>
+                <li><a href="#story-8" class="glass-tile nav-link">
+                    <div class="tile-title">Ka Pu F. Rosiamliana Nghilhloh Nan</div>
+                    <span class="tile-author">F. Lalmuanpuia</span>
+                </a></li>
+                <li><a href="#story-9" class="glass-tile nav-link">
+                    <div class="tile-title">Kan Ṭhian Siamliana</div>
+                    <span class="tile-author">Lalduhawma</span>
+                </a></li>
+                <li><a href="#story-10" class="glass-tile nav-link">
+                    <div class="tile-title">U Siama Kha</div>
+                    <span class="tile-author">H. Khuangsanga</span>
+                </a></li>
+            </ul>
+        </aside>
+
+        <main class="content-feed">
             
-            <div class="story-card reveal">
-                <p>F.Rosiamliana hi a pian leh murna chu Mizoram khaw lar tak Ngopa khua a ni a, A pa Aizika niin a nu chu Khuangliani a ni. Amah hi mi ngawichawi, tawng duah lo, a thil vei tawh chu tihhlawhtlin tum tlat mi a ni. Kum 1994 khan Aizawl DIET-ah kan training tlang a, a felin a entawn tlak hle thin a ni. Kan thil zir hrang hrang te a thiamin a la thutak hle thin a, a thiamthei pawl a ni thin. WE Teacher Association kan din tirh pawh khan member ni ve lo te a veiin member-a awm ngei tura fuihtu ber a ni thin. Association -ah a phurin fee khawn nikhuaah pawh a thawh hmasaah a tang zat zat thei zel a, Association tana mi hlu tak a ni.</p>
-                <p>Thiam thil a ngahin a kut a themthiam hle a, Tuizem khawr leh bawlhhlawhruhna, sikri thlengin a khawr thiam a, a hnen atang hian thil tamtak ka zir chhuak a ni. Tin, Insak pawh a thiam hle mai a, Training laia inrel dawna Angle lak dan te pawh a thiam hle. A thiltih reng rengah khan duhtuina a tel zel a, zir tur tamtak min hnutchhiah reng a ni. A chanchin sawi tur tam tak a awm ang a, sawi sen pawh a ni lo ang. A nupui Pi Ralziki keini Association tan chuan mi hlu tak a ni a, kan hlawh pun kan nawr lai pawh khan a kalhmang leh tih dan tur tam tak min hrilhin min buaibui nasa hle a, hotute hnena lehkha kan submit hrang hrang pawh min bawhzui sakin theihtawp chhuahin keini pawl tan hian a theihna a hmang nasa hle a, a pasal leh a thawhpuite tan a inpekna hi a fakawm hle.</p>
-                <div class="author-info">
-                    <span class="author-name">— J. Zatawna</span>
+            <article id="story-1" class="page-entry scroll-reveal visible">
+                <h3 class="entry-heading">KA PASAL F. ROSIAMLIANA</h3>
+                <p>Ka pasal F. Rosiamliana hi Aizika leh Khuangliani te fa palina niin Ni 25.6.1953 khan Ngopa-ah a piang a, a naupan lai chuan naupang hmelṭha a sawi a ni ṭhin. An unau upat dan indawt chu hetiang hi a ni:</p>
+                <ol>
+                    <li>Lt. F. Lalrinliana (L) MNA</li>
+                    <li>F. Chhanliana (L) H/o Zomawii, Ngopa</li>
+                    <li>F. Sangluti W/o Upa T. Thlamuana (L), Ngopa</li>
+                    <li>F. Rosiamliana (L) H/o R. Ralziki, Chanmari West</li>
+                    <li>SR. Lalhmingthanga H/o Chawimawii (L), Lungphunlian</li>
+                    <li>K. Lalsanga H/o Rammawii, Chanmari West</li>
+                    <li>F. Kapmawia H/o B. Lalnuntluangi, Ramthar Veng</li>
+                    <li>F. Lalrinsangi, Durtlang</li>
+                    <li>F. Rohmingliani, Ngopa</li>
+                    <li>F. Zothansanga H/o Zozamliani, Bawngkawn</li>
+                </ol>
+                <p><strong>A hun hmasa lam:</strong> Kan pa hi a naupan lai aṭangin infiamna ngaina tak a ni a, football hi a tui lehzual a, a tlangval lai pawha Ngopa 'A' team a khel pha ve ngat a ni. Ngopa khua a football ti hmasawntute zingah a hming hi an lam ri ve ṭhin. Ngopa khaw aiawha football petin vawi eng emaw zat khualkhuaah zin chhuakin cup, belpui leh Shield te lain hun a hmang ve zak zak ṭhin. Inkhela khaw dang aṭanga an lo haw nikhua hian nula leh tlangval ten lo hmuakin parṭhi te nen ropui takin an chakna an lawm ṭhin. An hunlai chuan tournament khata pet goal hnem ber dinhmun te pawh a lo hauh ve tawh ṭhin bawk. Kum 1979 aṭanga 1981 chhung khan Ngopa GSA President a lo ni tawh bawk. Ngopa khawtlangin inkhelhna tur hmun khelmual ṭha an neih theih nan nasa taka hmalatute zingah a hming hi an lam ri ve ṭhin.</p>
+                <p>A phak ang tawka ṭhain a vanglai hun hi a hmang ve niin ka hria a, kan inneih hma hian YMA section Leader a ni ṭhin a, kan inneih hnu thleng pawhin Branch YMA hruaitu a ni ṭhin. Khawtlang chhiat ṭhatniah Val upate kaihza vengtu a ni ve tlat ṭhin. Aizawla kan awm hnu pawh hian YMA hian a lung a len zui zel a, Chanmari West Branch Executive Committee member te niin Khuangchera Section Office Bearer-ah thlan a ni chhunzawm ve reng a, a kum a lo upat deuh hnu thleng pawhin Khuangchera Section tan hian a theih tawk a chhuah ṭhin.</p>
+                <p>Ram rorelna ṭha a awm theihna turin a rilru a seng nasa ve hle a, politics a tuipuiin eng leh kawngpui ṭha neih hi a vei ṭhin hle. A tlangval lai aṭangin Ngopa-ah PC Party ṭhalai hruaitu a ni reng ṭhin a, sorkar hna a thawh hma khan Chanmari West PC Party Unit Treasurer a ni ṭhin a, kum 1993 a sorkar hna a thawh tak avangin politics a chawlhsan ta a ni.</p>
+                <p><strong>Eizawnna lam:</strong> Tea pa hian chhungkaw harsatna avangin lehkha a zir sang thei lo a, a nu leh pa an hrisel loh avangin chhungkaw chawma enkawl a ngai a, hlo thlawh leh hnathawh hrang hrangah a naute kilkawitu ber a ni. Zirna lamah rualawt hle mahse lehkha a zirsan theih loh avangin a naute ho hi lehkha zirtir a tum hram ṭhin.</p>
+                <p>A farnu F. Lalrinsangi'n sorkar hna a thawh hnu kum 1984 khan hmasawnna beiseiin Aizawl-ah kan pem ta a, Aizawl-a kan awm hnu hian RD hnuaiah Mistiri hna a training a, kum 1985 khan ṭha takin a pass a, chuta ṭang chuan mistiri hna a thawk chho a, a rem rem thawkin mi hnuaiah chhungkaw chawm nan a inhlawh ṭhin. Mi taima, thawh hreh nei lo leh hmasawn tum tlat mi a nih avangin a nupui fanaute hi harsain min siam ngai bik lo.</p>
+                <p>Kum 1993 khan Work Education Teacher hna a dil a, vanneihthlak takin a tling ve hlauh a, ni 30.11.1993 khan Govt. Middle School, Tualte-ah hna hi a zawm a, a vawikhat dilnaa hna a hmu nghal mai chu Pathian chungah kan lawm hle. Tualte-a a awm lai hian nuam a tiin "Fanai tamna khua a ni e" tiin a sawi ṭhin.</p>
+                <p>Hna a zawm aṭanga thla ruk hnu Kum 1994 khan DIET, Aizawl-ah training tura koh zingah a tel ve leh hlauh a, training ṭha taka a zawh hnu ni 16.2.1995 khan Govt. Middle School, Dawrpui Vengthara thawk tura tihna transfer order a hmu zui a, ni 18.2.1995 khan a thawhna thar turah hna a zawm a, a boral thlengin Govt. Middle School Dawrpui Vengtharah hian a thawk ta a ni.</p>
+                <p>A thawhpuite nen hian inkungkaihna ṭha a siam thiam ve hle ni tur a ni, a naupang lam leh a upa lam thleng pawhin an nel em em zel a, chhungkuain chhiat ṭhat kan tawh chang pawhin a thawhpuite hian min ṭawiawm ṭha thei hle. Naupang ngaina leh lawm chi a nih bawk avangin a zirlai naupangte pawhin an nel hle ṭhin.</p>
+                <p>Ka hmuh dan chuan chhungkaw ngai pawimawh tak mizoin Patling kan tih ang hi niin ka hria a, lehkha zir sang lo mah se Mathematics hi a thiam em em a, Middle School level thleng hi chu a zirtir ve mai thei zel a, kan fate leh kan hnena lehkha zira rawn awmte pawh hi a zirtir mai thei zel a ni.</p>
+                <p>Chhungkuaa pa mawhphurhna leh dinhmun hi a nun chhuahpui hle niin ka hria a. Chhungkuaa Pathian biakho hi a phak ang tawkin a ngai pawimawh hle a, tu leh fate thu ṭha hrilhna hun remchang atan a hmang ṭhin. A nunah hian entawn tur tam tak min hnutchhiah a ni. A hnaah kal tlai a duh ngai lo a, a theih phawt chuan hma taka school thlen a tum hram hram ṭhin. Thusawi duah hi a thiam lem lo a, a taka tih duh mai chi a ni tih hi a hun hman dan aṭangin a langchhuak fo ṭhin niin ka hre bawk.</p>
+                <p>Hna hi thawh hreh leh thawh zah a nei lo a, kan inneih hlim hian kuthnathawkin chhungkua a chawm a, a changin hlo thlawh a ngai a, a chang leh serthlum ṭiak te pawtin a inhlawh a, mistiri hna thawkin insak, furniture siam, tuizem khawr, thingrem khawr leh bawlhhlawhruhna khawr thlengin a ṭul phawt chuan a thawk mai ṭhin.</p>
+                <p>Pathian zara Sorkar hna a thawh hnu thleng pawh hian ran a talh ve reng a, a boral ni thleng khan Chanmari West Sazuar Association-ah President a ni a, kan vengin sa ṭha leh thianghlim kan ei theihna tur leh sa zawrhna hmun mumal kan neih theihna turin hma an la ṭhin. Krismas leh Kumthar ruai buatsaih leh Kohhran Camping neih nikhuaah a phak ang tawkin fatu hna hi hun engemaw chen kha a thawk ve ṭhin bawk.</p>
+                <p><strong>Chhungkaw lam:</strong> Kan pa nen hian Ni 25, October 1980 khan kan innei a, fapa pakhat F. Lalrinzuala H/o. Dr. Lalbiaksangi Rawihte kan nei a, tu duhawm tak tak pathum kan nei bawk a, chung te chu:</p>
+                <ol>
+                    <li>F. Vanlalrohlua</li>
+                    <li>F. Lalhruaizela</li>
+                    <li>Rinsangzuali Fanai te an ni.</li>
+                </ol>
+                <p>Tea pa hi hmangaihna ngah tak, chhungkhat laina leh lam hla deuh thleng pawha huikhawmtu, chhungkaw tana PA nih tling ve tak a ni. Ka chhungte lam leh ama chhungte lam hi thlei bik nei miah lova min hmangaihna leh buaipui ṭhinna kha theihnghilh a va har dawn em.</p>
+                <p>Chhungkaw harsatna avanga sang tak thlenga lehkha a zir theih loh avangin zirna lamah hian a rualawt hle ṭhin a, chhungkhat laina, u leh nau fate lehkha zir duh leh zir peih an awm phawt chuan theih tawpa puih leh enkawl hi a duh a, chutiang rilru chu a put tlat avangin kan in leh lo aṭanga lehkha zir chhuak leh thiam thil chi hrang hrang zir chhuak hi an awm ve nual tawh a ni. Kan hnen aṭanga lehkha zir chhuak zingah hian Pathian malsawmna dawnga hna ṭha tak tak thawk a, chhungkaw chawm nana hmang ta pawh mi eng emawzat an awm tawh a, a lawmawm takzet a ni. Kan lo enkawl tawhte hian min hmangaih em em hlawm a, kan chhiat ṭhatah hian an lo lang vat zel ṭhin bawk.</p>
+                <p>Aizawl leh Ngopa lama awm; u leh naute, a nu leh a pa lam te, a tu leh fate, keini a nupui u leh naute leh fate min huikhawmtu ber a ni a, chhungkhat ho hnena a thusawi tam ber pawh "In zingah in theih ang tawk leh in phak ang tawk tawka Inhmangaihtawnna in lantir hi thil ropui ber a ni" a ti ṭhin. Chhungkaw chaw eikhawm leh thiltih nikhuaa a tu leh fate a fuihna pawh "Keini chu kum upa lam kan ni tawh, kan awm loh hnuah pawh lo inhmangaih tawn ula, lo inngaihsak ṭhin ang che u" tiin a chah mawlh mawlh ṭhin a ni. Chhungkhat leh ṭhenrual ṭha ten chhiat an tawh chang hian a theih phawt chuan zanlai pawh nise a kal hram hram ṭhin a, khual khuaa kal a ngaih chang pawhin a dam phawt chuan a kal hram ṭhin.</p>
+                <p>Tunhma deuh kha chuan veng chhunga chhiat tawk an awmin kuang hi an siam chawp mai ṭhin a, Section hian kuang siamna hmanrua an nei ṭhin. Kan awmna Khuangchera Section kuang siamna bungrua hi a thingrem chawpin a kawl ṭhin a, chhiat tawk an awm chuan eng hun pawh nise a inpuchhuak a, kuang siam tur hian a kal vat ṭhin.</p>
+                <p>Ngopa lama kan chhungte boral an awm leh Aizawl aṭanga Ngopa lama ruang phurh chhoh ngai an awm nikhuain a dam phawt chuan kal zel hi a duh ṭhin a, a theih phawt chuan a zuiin a lo buaipui ve fo ṭhin a ni. Ngopa Welfare tan hian a theih tawkin ṭhahnem a ngai ve hle a, Ngopa Welfare Committee member hi a ni ve reng ṭhin.</p>
+                <p><strong>A nat dan:</strong> Tea pa hi Pa hrisel tak, thlan laih nikhua pawha pumraw lian leh chak tia sawi a ni ve ṭhin a, insawiselna leh nawm sam loh hi a nei khatin a sawi ngai mang lo a ni. Kum 2007 kum laihawl vel aṭang khan zunthlum natna hi a nei tih kan hria a, exercise la leh damdawi eiin a inenkawl a, hma a sawnin a ṭha chho ve leh hle.</p>
+                <p>Kum 2017 May Ni 15 khan a School kal lam chu Vaivakawn a thlenin a nuam lo ṭan deuh a, harsa ti tak chungin school a thleng a, Civil Hospital-ah hruai a ni a, Heart Attack a ni tih hriat chhuah a ni a, theih tawpa Doctor leh Nurse ten kar 1 an enkawl hnuah ṭha takin Civil Hospital kan chhuahsan leh thei a, Pathian tihdamna ropui tak a chan avang hian kan lawm em em a ni.</p>
+                <p>Doctor hnenah checkup-in a khat tawkin kan kalpui ta reng a, Kum 2018 April 23 khan Birla Heart Research Centre, Kolkata-ah refer a nih avangin kan fate nupa leh Mami'n an zuk hruai a, hmun 2-ah stent (Angioplasty) vuah sak niin kar khat hnuah dam takin Aizawl an lo haw a, amah pawhin hma a sawn hle niin kan hria a, kan lawm hle.</p>
+                <p>Kum 2021 pawh a lung lama harsatna em em nei lovin hun kan hmang chho a, Covid 19 hri len laite a nih avangin Doctor pawh hmuh an harsa a, amahah insawiselna em em a neih loh avangin ngaihṭhat lohna pawh kan nei lem lo. Tuk khat a zing tho chu a khakah thisen ang tak a awm avangin May 17, 2021 khan Ebenezer Hospital-ah checkup turin kan hruai a, tih ngai an sawi hrang hrang te kan tih hnuah May 21,2021 khan chuap cancer (advance stage) a ni tih finfiah a ni ta a, a natna hi langchhuak mai lovin hun rei tak a lo cancer tawh tih hriat chhuah a ni lehzel a, damdawiinah admit nghal a ni ta a ni.</p>
+                <p>Natna dang a neih nual avangin Doctor ten chemotherapy a khai ngam ta lo a, May ni 25 aṭang khan a taksaa effect nei tlem ber tura an ngaih chemo(mum) an ei tir ta a, cancer hnathawh a taksa a lo nasat tawh avangin awmzia a nei hleithei ta lo a, a taksa a chak lo ta hret hret a, Covid 19 hri a kai a hlauhawm bawk si avangin Doctor te thurawn angin damdawiin lamah hun kan hmang ta char char a, June ni 14-20 chhung chu in a thlakhlelh em avangin in lamah kan inenkawl leh a, ṭhat lam a pan hleih theih tak loh avangin Ebenezer Hospital, chawnpui lamah bawk kan indah lut leh ta a ni. Hniam lam a pan zel avangin August ni 11 zanah ICU -ah dah luh a ni a, theih tawp chhuaha enkawl a nih laiin August ni 13, 2021 zing lam dar 1:35 khan thlamuang takin min kalsan ta a ni.</p>
+                <p>A nat chhung zawng hian Tea pa hian a na vawikhat mah a sawi ngai lo. A lu chungah kut nghatin zing leh zantin kan ṭawngṭai ṭhin a, Lalpan min awmpui a, thlamuang takin kan awm ṭhin. Covid hri len lai a nih avangin duh dan danin inriahpui theih a ni lo a, ka fapa te nupa, kan tunu Zorampari (Mami), ka vahpa R. Lalfakzuala leh ka nau Rinchhungi te nen a inchhawkin kan riahpui ṭhin a, mimal leh Kohhran hrang hrangte hnen aṭangin ṭawngṭaipuina a dawng nasa hle a, Lalpan kan ṭawngṭaina hi nasa takin min chhang a ni.</p>
+                <p>Hrileng karah pawh a damlo rawn kan hian Ngopa leh hmun hrang hrang aṭangin a u leh nau, tu leh fate an lokal a, a boral ni thleng khan an awm ta hlawm a, kan lawmin kan thlamuanpui hlawm takzet a ni.</p>
+                <p><strong>Tlangkawmna:</strong> Ka pasal F. Rosiamliana nen hian kum 40 leh thla 10 kan innei a, kan inneih chhung hian ka tana hrehawm turin vawi khatmah a awm ngai lo a, khawngaih rawngbawl hna kan phak tawka kan thawhnaah min ṭanpuitu ṭha tak a ni a, a chungah hian ka lawm takzet a ni. Kum 2005 October ni 24 khan kan inneih kum 25-na champhaphak kan lawm a, kum 2020 khan kan inneih kum 40-na lawm leh kan tum mek laiin hripui leng avangin kan tihlawhtling thei ta lo.</p>
+                <p>A boral hun kha hrilen vanglai a nih avangin thiltih a harsa hle a, chuti chung chung chuan kan lusun khawhar min hnem turin chhungkhat laina te bakah YMA leh khawtlang hruaituten an theih ang tawkin min buaipui a, mi engemaw zatin min tlaivarpui thei kha kan lawm takzet a ni.</p>
+                <p>Damdawiina kan awm chhung zawnga enkawl a nih lai khan kan nau K. Vanlalchhanhimi (A ṭhianpa Pu K. Darthantluanga fanu) hian a pa Siama kha duat takin a enkawl bawk a, kan va lawm tak em. Kan unaute zawng zawng chungah kan pa an hmangaihna thinlung taka an lantir kha ka theihnghilh ngai lo ang, kohhranho leh mi ṭhahnem takin min ṭawngṭaipui a, sum leh pai ṭhahnem tak amah kan nan mimal leh a awmna pawl hrang hrang leh kohhran ten min pe bawk a, Doctor leh Nurse ten theihtawp chhuahin min enkawl a, kan lawm takzet a ni. Pathian hian kan pa kha a hmangaih em em a, a boral ni thleng khan vawikhatmah na a neih thu a sawi ka hre lo a ni.</p>
+                <p>Ka pasal F. Rosiamliana hriatrengna lungphun min hmanpui tura lokal zawng zawngte kan chhungkuain in chungah lawmthu kan sawi takzet a, Pathianin a let tam takin malsawm zel che u rawh se.</p>
+                
+                <div class="author-block">
+                    <div class="author-name">R. Ralziki</div>
                 </div>
-            </div>
+                <div class="back-to-index"><a href="#chanchin" class="nav-link">⇡ Thlanna Ah Chhoh Leh</a></div>
+                <div class="page-ornament">❦</div>
+            </article>
 
-            <div class="divider reveal">✦ ✦ ✦</div>
-
-            <div class="story-card reveal">
-                <p>Pu F. Rosiamliana hi 15.02.1995 ah Govt. middle School Dawrpui Vengthar ah hian Craft Teacher (W.E Teacher) in a rawn lut a. Amah hi pa tha tak, mi kawm nuam leh tawhpui nuam tak ani a, a thawhpui te pawh in kan ngaina in tun thlengin a chanchin hi kan la sawi thin ani.</p>
-                <p>Pu Siama hi Craft teacher anih angin a hna hi a tlinin a tui pui em em a, naupang te thiamna hai chhuah sak kawngah a thawh hlawk thin hle ani. Sikul naupangte hmeichhe lam la phiar leh buh thap/buh thlei thlengin a zirtir a , mipa te pawh thiam hnang tah chi hrang hrang a zirtir thin ani. A dam phawt chuan sikul hi a thulh ngai lova, a hun takah thlengin ban hun hma in a chhuak ngai lo. Sikul naupangte discipline vawn chungchangah a duh fir thei hle. Naupang tla dah deuh leh in thlahdah te a hre thei hle a, zilh hauna pekna kawngah thahnem a ngai thei hle ani. Sikul building leh a vel vawnfai chungchangah naupangte a kaihruai tha in, amah pawh h hian hmanrua leh bungraw chhia thawmthat chungchangah a thawh hlawk thei le ani. Sikul bungrua a chhiatin pawn lam mi rawih ngai loin a mawhah lain aman a buaipui vek thin ani.</p>
-                <p>Pu Siama hian infiamna lam te pawh a ngaina hle a, zonal sports neih dawn te hian naupangte han practice puiah thahnem a ngai thin em em a, naupang ti tha duh lo deuh leh zawi deuhte a ngai thei lo hle thin. Sikul dang nen kan han inkhelh nikhua ten naupang te au phurtu ber ani thin a, kan chak nikhua pawh a nuam ti ber leh lawm thiam ber ani. Thil thiam a ngah em em a, sikul hian vawk han vulh chang te pawh kan nei thin a, a ser hun a thlen pawhin amah in a talh in a ser vek thin ani. Pu Siama hi hun rei tak chhhung Govt. Middle School, Dawrpui Vengthar ah hian a thawk a, zirtirtu lo awm thar te a lo lawm thiam in min ti tlangnel vat thin a, a awm thar te pawh in kan ngaina in a bul a awm nuam kan ti em em thin ani. Hun enga maw chen kan thawh ho hnu in taksa lamah harsatnain a tlak buak tak avangin kan thawk ho zui rei thei ta lova , kan la ngaih em em laiin chatuan ram min pan san ta a. Kan thinlungah hian kan thawhpui Pu F Rosiamliana hi a thi tawh ngai dawn lova, vawin ni thleng hian a chanchin kan la sawi a, a sulhnu kan la chhui zel ani.</p>
-                <div class="author-info">
-                    <span class="author-name">— Colleagues</span>
+            <article id="story-2" class="page-entry scroll-reveal">
+                <h3 class="entry-heading">F. ROSIAMLIANA NGHILLOH NAN</h3>
+                <p>Ṭhianpa, i va reh rei ta em! I thang rei tak em avangin i thai leh hraileng ten i tana tisa thil taka an tih theih tawk, i hlimthla leh sulhnu chhuina, hriatrengna lungphun a lo ngai ta mai hi hriatthiam a va har tak em. Mahse, hring danah a ṭul miau si a nih hi. Hei vang hian i kalsan i hmangaihte hi rawn dem lul lo la. "Ka tan an tih theih tawk an ti anih khu" tiin lawmthu lo sawi ngei ang che. Nang zawng i patling a, i hring chan chhunga i hmangaih kal ta te chunga i tih ṭhin ang kha i chungah an tih ve a ngai ta a nih hi. I puala i hun hnuhnung siam a nih avang hian kan thinlungah i dai dawn lo, famkhua lawia i hnen thlen hun erawh chuan i sakhming a dai mahna.</p>
+                <p>Ti hian ka dawn ṭhin.... Kan hringchan dun hun chhunga ṭhenrual ten "Hrangchhuana leh Chawngmawii" tia hming lem min hlan lai te kha a va ngaihawm em. Nang zawng i pa a, anka nem i chhakchhuah tlem ṭhin avanga mite sel i lo hlawh palh takah ti hian kei Chawngmawii hian vawiin i tana hun tawi te hmanna ni ngeiah hian i ze ril ka hmuh chin kan tlangau pui teh ang.</p>
+                <p>Ka ṭhianpa F. Rosiamliana (Hrangchhuana) kha a anka a hriamin kha hlein lang mah se, a thinlung erawh a thlum tlat a sin! Pa Siama hi thinlung Mangai, hmui Quinine ka ti lo thei lo. Eng vangin maw? Khai mah aw...Khaw nge Pa Siama? E le Ngopaah. Eng nge a tih? An chhungte an thi. Khaw nge Pa Siama? Mitthi a zui. Khawiah maw? Ngopa lamah. Khaw nge Pa Siama? Chu mi kha mi vengah mitthiah a kal. An chhungte em ni? An khaw chhuakte an ni awm e.</p>
+                <p>Ngopa khaw chhuak zawng zawng hi Pa Siama chhungte an ni vek nge, amah hian mitthi hi a lawm hrim hrim tiin Khuangchera Section YMA, Chanmari West-a a rawngbawlpui ṭhinten za lo chunga nuiin kan hlimpui ṭhin hle. Kan Bible-in thupek ropui ber dawttu min hrilh chu "Nangmah i inhmangaih angin i vengte i hmangaih tur a ni" tih a ni a. Ka ṭhianpa chet vel dan en hian a hmui a lo Quinine a nih pawhin a thinlung erawh a lo Mangai tak zet a ni. Hei lo liama vengte hmangaih dan hi a awm chuang dawn em ni?</p>
+                <p>Bible vekah "Chhanna nemin thinur a tikiang ṭhin" tih kan hmu leh a. Ka ṭhianpa chhanna nem dawn loh avanga lung dam lohna nei te kan lo awm ngei ang tih ka ring a, chutiangte hnenah chuan vawiin, a hun hnuhnungah hian a hmingin in ngaihdamna ka dil takzet a ni.</p>
+                <p>Aw le, ṭhianpa (Tea pa) i mi hmangaihna leh duhsakna zozai te kha i hun hnuhnung hmanga lo kal te hnenah hian zep awm lovin kan sawi teh ang. I Ngopa zin haw nikhuaa Tuiphal sangha min hawn ṭhin te, ṭhiante nena a ki bul sa eiho nikhuaa mawi leh mawi lo dawn lo a, ka duh em em (sa bil) ka tan i serh hran ṭhin te, ṭhianten an lo lak palh pawha en liam mai lo va i lak let leh ngat te kha a zahthlakin ava hlu si em.</p>
+                <p>Keini ṭhiandun thiam tawk fatu nikhuaa naupang zawk fe mah ni ila min ngaihchan thiam dan te, insem tur thil a awm changa ka chan loh hlaua i chet dan zawng zawng te kha hmangaihna mak tak chu a va ni em!</p>
+                
+                <div class="author-block">
+                    <div class="author-name">K. Darthantluanga</div>
+                    <div class="author-address">Chanmari West</div>
                 </div>
-            </div>
+                <div class="back-to-index"><a href="#chanchin" class="nav-link">⇡ Thlanna Ah Chhoh Leh</a></div>
+                <div class="page-ornament">❦</div>
+            </article>
 
-        </div>
+            <article id="story-3" class="page-entry scroll-reveal">
+                <h3 class="entry-heading">KA U F. ROSIAMLIANA</h3>
+                <p>Mi unau leh chhungkua pawh hian mi danglam bik an nei ṭheuhin ka ring a, chutiang chuan keini unau 10 zinga danglam bik kan neih chu vawiina a lungphunna hun kan hman mek kan u, kan nau F. Rosiamliana (F. Lalrinzuala pa) hi a ni. Kan nu leh pate an hrisel loh avangin chhungkaw tan kawng tinrengah nu leh pa aiawhtu a ni a. Kan nu leh pate a hmangaih a, a ngaihtuah ang bawkin a unaute leh tu leh fate min huikhawm tlattu a ni.</p>
+                <p>Chhungkaw tana thawkrim leh ei zawngtu ber anih avangin a hah ṭhin hle a, a naute tan bik phei chuan a thawhchhuah/hlawhchhuah hi kan nghahfak leh innghahna a ni. Hetiang taka thawkrim anih avang hian 1983 kuma Sorkar hna hniamte ka phak tawk ka'n thawh ve khan ava lawm tak êm! "Rinsang, ka lawm a ni, buhfai bag khat man i lo hlawh chhuak ve pawh hi a hlu asin" a ti a. "Hmeichhe pakhat Sorkar hnathawk hi chhungkaw tan ava hlu êm" a ti. Kan tih ve chhunah hian a lawm thiam êm êm ṭhin.</p>
+                <p>Keimah phei hi chu Sikulah min hruai a, min pua a, ka u Lalpiani (Ka pa F. Aikima fanu) hnenah min dah ṭhin. Ka khawngaih ṭha leh ṭhin. Hnathawhnaah pawh min kaihruaitu a ni, hlo thlawh hian khûpa kut nghah a phal ngai lo, ṭuan a muang a ti ṭhin. Kum 1979 khan Tuisik kam mau hmun kan nei a, ruahsur hnuaiah ṭhelretpuan sin chungin hlo kan thlo dun a, thosi a tam hle mai a, min khawngaih ṭhin "Rinsang meizial hi i zuk theih loh pawhin hâm rawh, thosi a tam em mai" a ti. "Aizawlah hian In nei theiin awm mah ila, Ka nu chenna hi a chhiat chuan a fate kan mualpho a ni" a ti a. Kan unauzain theih tawp chhuaha ṭan lain kum 1986 September thla khan kan Inpui Ngopa ami hi u Lalbiaka (a nuphal pa) nen an rawn sa a, thlakhat chiah an sa a ni. Ka nu kha ava lawm tak êm! Ka nuin "Siama pindan pawh siam a ngai lo, a nuam em mai, heti hian i awm huau mai ang" a ti.</p>
+                <p>Mitthi ina tlaivar a ngaih chang hian a naute min vawng khawng khawp mai. "Mitthi ina tlaivarin zun zungin chhuah loh tur" a ti ṭhin. Tunhma mitthi in tlaivarna te chu tunlai ang a ni lo a, zanriah eikham aṭangin kal tlai bik nih hlauin kan che vat ṭhin a, zung lova tlaivar chu a theih ve tho e. Pi Zapuii thih lumen zanin kan ṭhiante nen zun zunga chhuak miah lovin kan tlaivar ve e.</p>
+                <p>Nu leh pa a zahin a ngaihlu a, a dah pawimawhna khan a ma nun tam takah malsawmna a dawn phah niin ka hria. Unaute leh tu leh fate min huikhawm a, min hliahkhuhtu kan ngai vawng vawng zel dawn a nih hi.</p>
+                
+                <div class="author-block">
+                    <div class="author-name">F. Lalrinsangi</div>
+                    <div class="author-address">Durtlang</div>
+                </div>
+                <div class="back-to-index"><a href="#chanchin" class="nav-link">⇡ Thlanna Ah Chhoh Leh</a></div>
+                <div class="page-ornament">❦</div>
+            </article>
+
+            <article id="story-4" class="page-entry scroll-reveal">
+                <h3 class="entry-heading">F. ROSIAMLIANA KA HRIAT DAN</h3>
+                <p>F. Rosiamliana hi Ngopa tlangval tlawmngai leh taima a ni a, a tlangval chhuah aṭangin Valupaten Ngopa tlangval rorel tura an kohkhawm ṭhin, Ngopa tlangval meizanghlap an tih zinga tel ṭhin a ni. Chhiatni ṭhat ni leh ramchhuahni te leh kangṭhelh nikhua te pawhin tlangvalte zinga hmahruai leh hnungdawl ṭhin te zinga mi a ni.</p>
+                <p>Siama te ṭhianho hian khawhar in riah hi an ngai pawimawh hle a, khawhar in an riahna aṭangin khawhar thar an awmin puanthuah an pu lut leh a, mahni khuma mu lovin kum hnih dawn laite khawhar inah an riak ṭhin, hetianga mahni in luma riak lova, khawhar inriak reng ṭhin an nih avang hian khawtlangin harsatna a tawh leh rikrum thilah te chechhuak hmasa an ni lo thei lova, khawtlangin an thlamuanpui hle ṭhin.</p>
+                <p>Kum 1973 khan Vaithla chhuah lam ram leh Sasen mualte leh Thingchip tlang te a kang a, he mi ṭum hian, Siama te ṭhianho leh tlangval tlawmngaite chuan Thingchip tlangah mei lam/mei kawng an sat a, an mei lam/ mei kawng sahah chuan ram kang chu lo dan tumin tumah tlanchhiat loh tur tiin mei alh vuakna nen an inchhawp a, mei lam/mei kawng sialah chuan an bawk a, ram kang nasa tak mai chu chhim thliin a rawn beng phut mai a, luang hung leh hmunphiah hung te chu a rawn tuam a, mei alh chu a rum vut vut mai a, tlangvalho chu an mei lam/ mei kawng sialah chuan an bawk a, tumah tlan loh tur an ti a, an tlan loh chuan an kang hlum thei mai dawna an hriat avangin valupate chuan thingtuai an thliak a, tlangval tlanchhiat tum lo ho hnungzangah chuan an hlap ṭhuai ṭhuai mai a, "Insaseng rawh u, mihring kan hlum ai chuan Ngopa ram pawh hi kang vek mahse a pawi lo" an ti a. Tlangval tlanchhiat tum lo nun chan huama mei lam siala bawk ho chu meialhin a rawn thlen hmain, an rawn vaw darh ta a ni.</p>
+                <p>Vanneihtlak takin Aizawlah sawrkar hnate a thawk a, Ngopa tlangvalte a kaihruai hman ta lova, Ngopa a awm laia a ṭhiante chu tuna Ngopa tlangvalte kaihruaitu ho Val upate an lo ni ta zel a ni. Thlan laih tur a awm pawhin a dama; a awm phawt chuan a ṭantu leh a hnu khartute zingah a tel ṭhin.</p>
+                <p>Rambuai avanga ṭam zual lai, Kum 1971 khan a ṭhiante ho leh tlangval dangte nen Valupate hnenah "Inhlawhna zawng ula, kan hlawh chuan buhfaitham lei ila, miharsa chhuanchhamte sem nise" an ti a, valupaten inhlawhna an zawnga hetih lai hian tlangvalin nikhatah Rs. 5 (Cheng nga) an hlawh a ni. An hlawhchhuah tlingkhawm zawng zawng chuan buhfaitham lei a ni a, miharsate hnenah sem a ni.</p>
+                <p>F. Rosiamliana pa Pu Aizika Fanai hi kum 1943 aṭanga Ngopa Valupa Pu Khawvelthanga ralrel pui lo ni tawh a ni a, Kum 1945-a Ngopa Vakawlchuan ram kang nasa tak, ṭhelh ṭum Ngopain kangṭhelhpui an tih maiah khan, Pu Aizika Fanai hi tlawmngai nopui dawm tura Lal leh upaten an thlan a ni a, hetiang tlawmngaihna nei hrin a nih avang hi a ni ngei ang, F. Rosiamliana hian a tlangval ṭan tirh aṭanga tlawmngaihna a nuna a vawn ngheh tlat ni.</p>
+                <p>A thlan vung suahdur khat pawh Ngopa tlangvalin kan thehchuah ve phak lohna hmunah zalh a nita mai hi kan va ui vawng vawng tak em, Siama mangṭha aw...</p>
+                
+                <div class="author-block">
+                    <div class="author-name">JC. Dailova (85)</div>
+                    <div class="author-address">Ngopa</div>
+                </div>
+                <div class="back-to-index"><a href="#chanchin" class="nav-link">⇡ Thlanna Ah Chhoh Leh</a></div>
+                <div class="page-ornament">❦</div>
+            </article>
+
+            <article id="story-5" class="page-entry scroll-reveal">
+                <h3 class="entry-heading">KA U SIAMA KHA AW</h3>
+                <p>Kum 1982 April ni 15 a lo her chhuah chuan, kan lei pathian ka pa Aikima (L) chu a her liampui a, a hma kum 2 liamtaah ka nu a lo boral tawh bawk nen, kan ute hmeichhia pathumin pasal an lo nei tawh bawk si, unau mipa pahnih kum 12 leh kum 14 mi mai tan chuan mei alh en bak hmabak kan neih loh laiin ka pa u, ka u siama pa Aizika chuan, "an ni unau chu kan enkawl tur an ni e" tiin hmangaih takin min tuam hlawm a, ka pa in unaupa ṭha tak mai a lo nei hi kan unau tan hian a hlu tih hian a sawifiah zo lo a ni ber e!</p>
+                <p>Keini unau vangte pawh a ni ang, ka u Siama hian thlawhhma (lo) zau tak tak neiin rim takin hna a thawk ṭhin a, ei leh in tur kan neih loh te, mi silh leh fen ang kan neih loh te a hlau hle ṭhin tihte hi tlaikhawhnuah ka hrechhuak.</p>
+                <p>Eizawn a awlsam zawk beiseiin Aizawl lamah an awm a lo ṭul a, chungah te pawh chuan mistiri hna rim taka thawkin insak hna kha khaw hrang hrangah thawkin an zin kual ṭhin a, kei ngei pawh Rawpuichhipah contract hna a thawhnaah thla khat leh a chanve chhung chu helper hna thawk turin duhsak takin min hruai ve a, a bula ka awm hian ka thla a muang a, nuam ka ti em em ṭhin. Kan unau Aikima fate ho hian anni nupa hi kan U bik hliah hliah a, engkima kan rawn, thutlukna min siampuitu te, min puih inpeih rengtu te an ni a, kan chhuang hle a ni.</p>
+                <p>Pathian malsawmna dawngin fapa pathum ka nei a, nupui an nei vek tawh a, kan fate nupui neih chungchanga ro min relpui hmante hi ka lawm asin aw! Ka u Siama hian Kohhran upa senior tak ang maiin chhungkaw rorel hi a thiam mai a ni lo, a thlamuanawm em em tlat zel hi a danglamna mak tak a ni. Kan chi leh kuang, keinin an hla deuh tawh kan tih te thleng hian kan hmaih palh hi a hlau em em zel a, "Ṭhat lam hmanga unau/chhungkhat kan inhnuh hnaih hi a hlu a nia, hmaih reng reng loh tur" tiin ṭhahnemngai takin kan inkungkaih dan chipchiar zawng zawng min hrilh chhuak dap peih ṭhinte kha a naute tan hian a hlu takzet a ni. Ka van tluk lo tak em!</p>
+                <p>Kum 1997-ah Aizawl, Mualpuiah chhungkuain kan awm ve ta a, chhungte tan pawh tlawhpawh kan awlsam lo hle chungin chhiat ṭhat kan tawh nikhuaah a thleng hmasa mai nilovin a tawp thlenga min uap peihtu a ni tlat zelte hi upa ber/pa ber nih hi a tlin em em a, kan thlamuanpui ngawih ngawih a ni.</p>
+                <p>Ka u Siama hi a boral tih mai pawh ni lova, a hun tawp lungphun hun siam a lo ngai ta mai hi a runthlak ka va ti tak em! Kum hlun lo tur khawvela awm kan ni miau si a, kan chunga roreltu Pathian engkimtitheia rorelah hian tumah vui thei kan ni si lo, Van kohhran famkimnaah chuan kan la inhmu leh ngei ang a, chhandamtu hmangaihna fakin hlim takin chatuanin kan la leng za ngei ang tih ka beisei tlat a ni.</p>
+                <p>Ka u Siam, mangṭha le.</p>
+                
+                <div class="author-block">
+                    <div class="author-name">F. Lalhmingmawia (Mahminga)</div>
+                    <div class="author-address">Mualpui, Aizawl</div>
+                </div>
+                <div class="back-to-index"><a href="#chanchin" class="nav-link">⇡ Thlanna Ah Chhoh Leh</a></div>
+                <div class="page-ornament">❦</div>
+            </article>
+
+            <article id="story-6" class="page-entry scroll-reveal">
+                <h3 class="entry-heading">KAN THAWHPUI SIR SIAMA</h3>
+                <p>Pu F. Rosiamliana hi 18.02.1995 ah Govt. Middle School Dawrpui Vengtharah hian Craft Teacher (W.E Teacher) in a rawn thawk ṭan a. Amah hi pa ṭha tak, mi kawm nuam leh thawhpui nuam tak a ni a, a thawhpuite pawhin kan ngaina-in tun thlengin a chanchin hi kan la sawi reng ṭhin.</p>
+                <p>Sir Siama hi W.E Teacher anih angin a hna hi a tlinin a tuipui em em a, naupang te thiamna hai chhuah sak kawngah a thawh hlawk ṭhin hle. Sikul naupangte hmeichhe lam la phiar leh buh ṭhap/buh thlei thlengin a zirtir a, mipa te pawh thiam hnang tah chi hrang hrang a zirtir ṭhin. A dam phawt chuan sikul hi a ṭhulh ngai lova, a hun takah thlengin ban hun hmain a chhuak ngai lo.</p>
+                <p>Sikul naupangte discipline vawn chungchangah a duh fir thei hle. Naupang tladah deuh leh inthlahdah te a hre thei hle a, zilhhauna pek kawngah ṭhahnem a ngai thei hle a ni. Sikul building leh a vel vawnfai chungchangah naupangte a kaihruai ṭhain, amah pawh hian hmanrua leh bungraw chhia thawmṭhat chungchangah a thawh hlawk thei hle. Sikul bungrua a chhiatin pawn lam mi ruai lovin a mawhah a la a, aman a buaipui vek ṭhin.</p>
+                <p>Sir Siama hian infiamna lam pawh a ngaina hle a, zonal sports neih dawnte hian naupangte a practice puiin ṭhahnem a ngai ṭhin em em a, naupang ti ṭha duh lo deuh leh zawi deuhte a ngai thei lo hle ṭhin. Sikul dang nen kan han inkhelh nikhua chang pawhin naupang te au phurtu ber a ni ṭhin a, kan chak nikhua pawha nuam tiber leh lawm thiam ber a ni.</p>
+                <p>Thil thiam a ngah em em a, sikul hian vawk vulh chang kan nei ṭhin a, a ser hun a thlen pawhin amah in a talh a, a ser vek ṭhin a ni.</p>
+                <p>Sir Siama hi hun rei tak chhhung Govt. Middle School, Dawrpui Vengthar-ah hian a thawk a, zirtirtu lo awm thar te a lo lawm thiamin min titlangnel vat ṭhin a, a awm tharte pawhin kan ngainain a bula awm nuam kan ti hle ṭhin a ni.</p>
+                <p>Hun engemaw chen kan thawhho hnuin taksa lamah harsatnain a tlakbuak tak avangin kan thawk ho zui rei thei ta lova, kan la ngaih em em laiin chatuan ram min pan san ta a, kan thinlungah hian kan thawhpui, kawm nuam leh rilru ṭha Sir Siama hi a thi tawh ngai dawn lova, vawiin thleng hian a chanchin kan la sawi a, a sulhnu kan la chhui zel a ni.</p>
+                
+                <div class="author-block">
+                    <div class="author-name">Colleagues</div>
+                    <div class="author-address">Govt. Middle School, Dawrpui Vengthar</div>
+                </div>
+                <div class="back-to-index"><a href="#chanchin" class="nav-link">⇡ Thlanna Ah Chhoh Leh</a></div>
+                <div class="page-ornament">❦</div>
+            </article>
+
+            <article id="story-7" class="page-entry scroll-reveal">
+                <h3 class="entry-heading">F. ROSIAMLIANA CHANCHIN</h3>
+                <p>F. Rosiamliana hi a pian leh murna chu Ngopa khua a ni a, a pa Aizika niin a nu chu Khuangliani a ni. Amah hi mi ngawichawi, ṭawng duah lo, a thil vei tawh chu tihhlawhtlin tum tlat mi a ni.</p>
+                <p>Kum 1994 khan Aizawl DIET-ah kan training tlang a, a felin a entawn tlak hle ṭhin. Kan thil zir hrang hrang te a thiamin a la thutak hle ṭhin a, a thiamthei pawl a ni. Work Education Teacher Association kan din tirh pawh khan member ni ve lo te a veiin member-a awm ngei tura fuihtu ber a ni. Association -ah a phurin fee khawn nikhuaah pawh a thawh hmasaah a ṭang zat zat thei zel a, Association tana mi hlu tak a ni.</p>
+                <p>Thiam thil a ngahin a kut a themthiam hle a, tuizem khawr leh bawlhhlawhruhna bakah sikri thlengin a khawr thiam a, a hnen aṭang hian thil tamtak ka zir chhuak a ni. Tin, insak pawh a thiam hle mai a, training laia inrel dawn a angle lak dan te pawh a thiam hle. A thiltih reng rengah khan duhtuina leh tih tak takna a tel zel a, zir tur tamtak min hnutchhiah reng a ni. A chanchin sawi tur tamtak a awm ang a, sawi sen pawh a ni lo ang.</p>
+                <p>A nupui Pi Ralziki hi keini association tan chuan mi hlu tak a ni a, kan hlawh pun kan nawr lai pawh khan a kalhmang leh tih dan tur tam tak min hrilhin min buaipui nasa hle a, hotute hnena lehkha kan submit hrang hrang pawh min bawhzui sakin theihtawp chhuahin keini pawl tan hian a theihna a hmang nasa hle a, a pasal leh a thawhpuite tan a inpekna hi a fakawm hle.</p>
+                
+                <div class="author-block">
+                    <div class="author-name">J. Zatawna</div>
+                </div>
+                <div class="back-to-index"><a href="#chanchin" class="nav-link">⇡ Thlanna Ah Chhoh Leh</a></div>
+                <div class="page-ornament">❦</div>
+            </article>
+
+            <article id="story-8" class="page-entry scroll-reveal">
+                <h3 class="entry-heading">KA PU F. ROSIAMLIANA NGHILHLOH NAN</h3>
+                <p>Ka naupan lai ka hriat theih chinah chuan kan chhungkua kha chhung rual ve tak naupang nen chuan chhungkaw member sawm (10) kan ni ṭhin a, ka nu Sangi chin hnuai lam zawng hian Sikul kan la kal a, ka pi leh pu an kum a lo upa tawhin an hriselna a ṭhat tawh loh avangin hnathawk thei tawh lo tar in nghak kan tih ang hi an ni mai a.</p>
+                <p>Ka pu Siama leh ka pu Mawituka te kha ramṭang a hnathawktu an ni ṭhin a, ka pu Mawituka hi 1975 khan sipai-ah ṭangin a theih ang tawkin chhungkua a rawn chhawmdawl bawk a.</p>
+                <p>In lum luaha kan chhungkaw kulpui ber chu ka pu Siama a ni a, kan chhungkua kha harsa hle ṭhin mah ila hmangaihnain a phuar khawm chhungkua ni vein ka hria a, khang kan chhungkim hun lai ka ngaihtuah khan a lunglen thlak ka tiin hmangaihna avanga kan insuihkhawm ṭhin kha a hlu ka ti takzet a ni. Kan ei bar zawnna ber chu thingtlang lo neih niin khang zawng zawnga engkima hmalatu chu ka pu Siama a ni a, lo vah aṭanga buh seng thlengin lo lam hnathawh kawng engkim kha ama hmalakna a ni ṭhin a, heng bakah hian chhungkaw sum mamawh thawh chhuah pawh a kut ken a ni ṭhin.</p>
+                <p>Ka hriat theih chinah chuan ka pu Siama kha a damlo a nih ngawt loh chuan a tlangval lai khan mahni ina a riah ka hre ngai lo. In lamah hnathawktu kulpui ber ni chung khan khawhar inah a riak reng ṭhin a, a tlangval hun chhung khan a theih ang tawkin mite tana malsawmna niin hun a lo hmang ṭhin a ni tih hi tun hnu, nikhua ka hriat hnu hian ka chhut thiam chauh zawk a ni. Football khelh a ngainain Ngopa 'A' Team-ah a khel ṭhin a, khawchhung leh khual khua aṭang tein Trophy an la ve fo a, GSA President-ah te ṭangin an hunlaiin an theih ang tawk tawkin Ngopa Public Playground ṭha neih theih nan an kut ngei a laiin, a vung kha empai a phurchhuakin hah takin an thawk ṭhin a ni.</p>
+                <p>Kan naupan lai chuan ka pu Siama hi tlangval ṭawng mawh leh inchhungah phei chuan ṭawng tam lo tak a ni. Ka pu Mathana nen khan naupang awm chhun kan ni a, ṭum khat chu promotion exam dawn hian lehkha kan zir ṭha peih lo hle mai a, ka pu (Aizika) khan, "Lehkha in zir ṭha peih lo em mai, i pu Siama amah chauhin lovah buhsengin a riak a, va feh ve rawh u" a ti a, lo kan va thleng chu amahin alo bung a, buh kan sengpui ve a, chawfak hunah ngawi rengin thlam lam a pan a, kan zui ve mai a, chaw ei kan siam a; chaw kan ei a, kan eikham chuan ngawi rengin favah a la a, bunna hmabak lam a pan leh ta mai a, keini pawh chuan ngawi rengin kan zui a, buh kan seng tlang leh ta malh malh a. He mi kum hian kan lo a hla a, lana feh chuan haw hma ngai ve tak a ni. "Haw rawh u" a tih hma chuan engmah kan sawi ngam si lova, ni kan en a ka pu Mathana nen chuan a sirah kan inmelh leh zak zak ṭhin a. Nakinah chuan "Haw rawh u" a rawn ti bauh a, rang takin kan tlan haw ta vang vang a, kha mi ni khan kha bak kha kan inbiak awm reng ka hre lo. A taimain a thununna kha a khauh hle a, meizial kan zu ru ve ṭhin tih a hriat khan, thil danga min hau vak lovin, "Meizial in zu duh anih chuan vaihlo hmun siam ve tawh mai rawh u" min ti a, min hrilh ṭhin fo chu, "Ei duh chuan thawh tur a ni" tih hi a ni tawp mai a ni.</p>
+                <p>Amah hi hmangaihna ngah tak a ni a, ka naupan lai aṭangin mi a ngaihtuah em em a, khawi hmunah  pawh awm ila ka chanchin hi a ngaihven reng ṭhin a, lehkha ka zirlai pawhin ka result te a ngaihvenin ka phak ang tawka hlawhtlinna ka chan ve te hian sawi nuam a tiin mi a fuih phur thiam ṭhin hle. Ka tana insen a hreh lovin a theih ang tawka min dawmkan leh mahni kea ding ve ngei thei turin min buatsaih ṭhin a, hnathawh kawng hrang hrangah min kaihruaiin a hnen aṭang hian B.A ka zirchhuak a. Kei lo pawh hi kan chhungkhat mi eng emaw zat a hnen aṭanga mahni kuta ding thei tura inchherchhuak hi keini thlah aṭang hian kan awm nual a, kan chhungkaw tan chuan 'pa ropui tak a ni' ka ti lo thei lo.</p>
+                <p>A hun hnuhnung lama Damdawi ina kan tlawh ṭuma a thu min chah, "Lo inhmangaih tlang dial dial rawh u, inhmangaihna hi a hlu ber" a tih te kha rilruah a riak reng a, a hun tawp dawn hnaia a tha neih ang tawk tawk sawm khawm a, min chul a, "Lo inhmangaih tawn zel rawh u aw" a tih te kha mitthlaah a chamin thinlungah a riak reng ṭhin, min hmangaihna zawng zawng nena min han liamsan ta vang vang mai hi chu hriatchhuah chang a tamin ka nun hi a va ruak ṭhin vawng vawng tak em. Aizawl khawpui lokal chang te hian a awm a ni tih ka hriatna hian min thlamuan ṭhin.</p>
+                <p>He kan hlun lohna tur ramah hian ṭapa hmangaihte kan inṭhen a ṭul ṭhin si a, ṭhen lohna tur khawpui mawiah chuan min lo hmuak ang che aw… ka pu Siam.</p>
+                
+                <div class="author-block">
+                    <div class="author-name">F. Lalmuanpuia</div>
+                    <div class="author-address">Ngopa</div>
+                </div>
+                <div class="back-to-index"><a href="#chanchin" class="nav-link">⇡ Thlanna Ah Chhoh Leh</a></div>
+                <div class="page-ornament">❦</div>
+            </article>
+
+            <article id="story-9" class="page-entry scroll-reveal">
+                <h3 class="entry-heading">KAN ṬHIAN SIAMLIANA</h3>
+                <p>Kan ṭhianpa F. Rosiamliana hi a tlangval lai pawha taima, tih tawh chu zuzi ngai lo mi a ni a, kum 1973 thleng kha chuan a nu leh pa hian hna an la thawhpui thei a, kha mi kum bak kha chu a naute ho nen chauh an ni ta a, chuti chung chuan lo zau tak an nei a, an thawkrim hle.</p>
+                <p>Kan ṭhianzaho hian kan inlawm ṭhin a, an lo a zau thei hle. Kan ṭhianzaho min ṭhuikhawmtu a ni a, a neih engmah a ui ngai lo. Aizawl an pem thlak hnu pawhin Aizawla awm te nen ani hian min huikhawm thiam a, Ngopaa a lo chhoh chang hian "Chaw eikhawm tur" a ti a, kan inlungrual phah hle a ni.</p>
+                <p>Vawiin thleng hian ṭhianza inlungrual tak kan nih phah a ni. Tunah chuan kan ṭhianho hi kum 70 hmel hmu deuh vek tawh kan ni chung hian "Ti ang" kan tih chu pheikhai rual takin kan la ti thei zel a, hei hi Siamliana ṭhahnemngaihna/ min fuihna rah a ni. Kan ṭhianza tana mi hlu, mi inpe a nihna zara ṭhian inkawmngeih leh inlungrual kan nihna kan la chhawm nun zel avang hian Siamliana chungah hian kan lawm hle.</p>
+                
+                <div class="author-block">
+                    <div class="author-name">Lalduhawma</div>
+                    <div class="author-address">Ngopa</div>
+                </div>
+                <div class="back-to-index"><a href="#chanchin" class="nav-link">⇡ Thlanna Ah Chhoh Leh</a></div>
+                <div class="page-ornament">❦</div>
+            </article>
+
+            <article id="story-10" class="page-entry scroll-reveal">
+                <h3 class="entry-heading">U SIAMA KHA</h3>
+                <p>Tleirawl kan nih ve hian an tlangval tawh; Ngopa khawtlang tan a theih tawp a chhuah ṭhin. Aizawla a awm hnu pawh hian Ngopa Welfare tana ṭangkai tak, Ngopaah kal ang tih chuan thei mai zel, chhuanlam siam ngai lo a ni. Ngopa Hmarveng YMA din a nih khan kal turin Welfare min sawm a, Pu Dawnga Serchhip awm lai khan kan pathumin kan kal a.</p>
+                <p>Zingkarah Watch Tower kan tlawh ṭumin Lo-ṭingṭang, Buhthimual, Vaithlakawn, Hmundo leh Vaithla-chhuahlam kha a lang chiang êm êm mai a. Nunhlui chhung kimlai thuhruk awm lovin a lang uarh mai si, U Siama khan "I retheih lai i ngai a nih kha, en duh tawh suh" min han ti a. Nuamsa tawh ni mah suh ila, ka rilru leh mitthlaah hian kha mi tuk U Siama, Pu Dawnga nena Watch Tower bula kan awm kha a cham reh thei tawh lo; khawvelah hmu tawh lo mah ila, ka rilru mitthlaah hian thamral ni a awm lovang.</p>
+                
+                <div class="author-block">
+                    <div class="author-name">H. Khuangsanga</div>
+                </div>
+                <div class="back-to-index"><a href="#chanchin" class="nav-link">⇡ Thlanna Ah Chhoh Leh</a></div>
+                <div class="page-ornament">❦</div>
+            </article>
+
+        </main>
     </div>
 
     <footer>
-        <p>In Loving memory of F. Rosiamliana (1953-2021)</p>
+        <p>IN LOVING MEMORY OF F. ROSIAMLIANA (1953-2021)</p>
     </footer>
 
     <script>
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
 
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
 
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
+            const articles = document.querySelectorAll('.scroll-reveal');
+            articles.forEach(article => {
+                observer.observe(article);
+            });
 
-        window.addEventListener("scroll", reveal);
-        reveal();
+            // Fallback for elements already in viewport
+            setTimeout(() => {
+                articles.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if(rect.top < window.innerHeight) {
+                        el.classList.add('visible');
+                    }
+                });
+            }, 100);
+
+            // Setup smooth anchor links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href.startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = href.substring(1);
+                        const targetElement = document.getElementById(targetId);
+                        
+                        if (targetElement) {
+                            targetElement.classList.add('visible');
+                            targetElement.scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                            history.pushState(null, null, href);
+                        }
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
