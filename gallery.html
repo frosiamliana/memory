@@ -291,7 +291,7 @@
     </div>
 
     <script>
-        const totalImages = 100; // Update this with your exact total image count
+        const totalImages = 300; // Update this with your exact total image count
         const imagesPerPage = 20;
         let currentPage = 1;
         let currentModalIndex = 1;
@@ -314,7 +314,7 @@
                 item.onclick = () => openModal(i);
                 
                 const img = document.createElement("img");
-                img.src = `gallery/${i}.jpeg`;
+                img.src = `gallery/${i}.jpg`;
                 img.loading = "lazy"; 
                 
                 img.onerror = function() {
@@ -331,14 +331,14 @@
             currentModalIndex = index;
             modal.classList.add("show");
             document.body.style.overflow = "hidden"; 
-            fullImage.src = `gallery/${index}.jpeg`;
+            fullImage.src = `gallery/${index}.jpg`;
         }
 
         function navigateModal(direction) {
             currentModalIndex += direction;
             if (currentModalIndex > totalImages) currentModalIndex = 1;
             if (currentModalIndex < 1) currentModalIndex = totalImages;
-            fullImage.src = `gallery/${currentModalIndex}.jpeg`;
+            fullImage.src = `gallery/${currentModalIndex}.jpg`;
         }
 
         document.getElementById("modal-prev").onclick = (e) => { 
