@@ -95,7 +95,6 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.4);
         }
 
-        /* FIX: Pointer-events disabled so clicks pass through to the element */
         .gallery-item::before {
             content: '';
             position: absolute;
@@ -169,7 +168,6 @@
             font-size: 1.1rem;
         }
 
-        /* FIX: Modal transition perfectly smooth */
         .modal {
             display: flex; 
             visibility: hidden;
@@ -291,7 +289,7 @@
     </div>
 
     <script>
-        const totalImages = 300; // Update this with your exact total image count
+        const totalImages = 300; 
         const imagesPerPage = 20;
         let currentPage = 1;
         let currentModalIndex = 1;
@@ -310,11 +308,10 @@
                 const item = document.createElement("div");
                 item.className = "gallery-item";
                 
-                // FIX: Attached the click event directly to the wrapper box
                 item.onclick = () => openModal(i);
                 
                 const img = document.createElement("img");
-                img.src = `gallery/${i}.jpg`;
+                img.src = `gallery/${i}.jpg`; 
                 img.loading = "lazy"; 
                 
                 img.onerror = function() {
@@ -331,14 +328,14 @@
             currentModalIndex = index;
             modal.classList.add("show");
             document.body.style.overflow = "hidden"; 
-            fullImage.src = `gallery/${index}.jpg`;
+            fullImage.src = `gallery/${index}.jpg`; 
         }
 
         function navigateModal(direction) {
             currentModalIndex += direction;
             if (currentModalIndex > totalImages) currentModalIndex = 1;
             if (currentModalIndex < 1) currentModalIndex = totalImages;
-            fullImage.src = `gallery/${currentModalIndex}.jpg`;
+            fullImage.src = `gallery/${currentModalIndex}.jpg`; 
         }
 
         document.getElementById("modal-prev").onclick = (e) => { 
@@ -358,12 +355,16 @@
         }
 
         document.getElementById("prev-btn").onclick = () => { 
-            if (currentPage > 1) renderGallery(--currentPage); 
-            window.scrollTo({top: 0, behavior: 'smooth'}); 
+            if (currentPage > 1) {
+                renderGallery(--currentPage); 
+                window.scrollTo({top: 0, behavior: 'smooth'}); 
+            }
         };
         document.getElementById("next-btn").onclick = () => { 
-            if (currentPage < Math.ceil(totalImages/imagesPerPage)) renderGallery(++currentPage); 
-            window.scrollTo({top: 0, behavior: 'smooth'}); 
+            if (currentPage < Math.ceil(totalImages/imagesPerPage)) {
+                renderGallery(++currentPage); 
+                window.scrollTo({top: 0, behavior: 'smooth'}); 
+            }
         };
 
         function closeModal() {
