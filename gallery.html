@@ -38,6 +38,38 @@
             position: relative;
         }
 
+        .header-nav {
+            display: flex;
+            justify-content: space-between; /* Left leh Right ah a pawt then ang */
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+
+        .btn-old-gallery {
+            display: inline-block;
+            background: linear-gradient(135deg, #d4af37, #b5952f); /* Rawng a danglam ang */
+            color: var(--bg-main);
+            text-decoration: none;
+            font-size: 1.1rem; /* A hawipui lian deuh */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            padding: 12px 30px; /* A len dan tur */
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+            border: 2px solid transparent;
+        }
+
+        .btn-old-gallery:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.6);
+            background: transparent;
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
         .back-link { 
             display: inline-block; 
             color: var(--accent); 
@@ -47,7 +79,6 @@
             letter-spacing: 2px;
             font-weight: 500;
             transition: all 0.3s ease;
-            margin-bottom: 20px;
             border: 1px solid transparent;
             padding: 8px 20px;
             border-radius: 50px;
@@ -266,7 +297,10 @@
 
     <div class="container">
         <header>
-            <a href="index.html" class="back-link">&#8592; Back</a>
+            <div class="header-nav">
+                <a href="index.html" class="back-link">&#8592; Back</a>
+                <a href="oldgallery.html" class="btn-old-gallery">Hun hmasa lam Thlalak</a>
+            </div>
             <h1>Thlalak Hrang Hrangte</h1>
         </header>
         
@@ -289,7 +323,7 @@
     </div>
 
     <script>
-        const totalImages = 300; 
+        const totalImages = 265; // Thlalak zat
         const imagesPerPage = 20;
         let currentPage = 1;
         let currentModalIndex = 1;
@@ -304,6 +338,7 @@
             const start = (page - 1) * imagesPerPage + 1;
             const end = Math.min(page * imagesPerPage, totalImages);
 
+            // Loop hian 1 atanga 20 thleng a ti indawt thlap dawn a ni
             for (let i = start; i <= end; i++) {
                 const item = document.createElement("div");
                 item.className = "gallery-item";
@@ -311,7 +346,7 @@
                 item.onclick = () => openModal(i);
                 
                 const img = document.createElement("img");
-                img.src = `gallery/${i}.jpg`; 
+                img.src = `gallery/${i}.jpg`; // .jpeg tih kha .jpg in a inthlak
                 img.loading = "lazy"; 
                 
                 img.onerror = function() {
@@ -328,14 +363,14 @@
             currentModalIndex = index;
             modal.classList.add("show");
             document.body.style.overflow = "hidden"; 
-            fullImage.src = `gallery/${index}.jpg`; 
+            fullImage.src = `gallery/${index}.jpg`; // .jpeg tih kha .jpg in a inthlak
         }
 
         function navigateModal(direction) {
             currentModalIndex += direction;
             if (currentModalIndex > totalImages) currentModalIndex = 1;
             if (currentModalIndex < 1) currentModalIndex = totalImages;
-            fullImage.src = `gallery/${currentModalIndex}.jpg`; 
+            fullImage.src = `gallery/${currentModalIndex}.jpg`; // .jpeg tih kha .jpg in a inthlak
         }
 
         document.getElementById("modal-prev").onclick = (e) => { 
@@ -355,16 +390,12 @@
         }
 
         document.getElementById("prev-btn").onclick = () => { 
-            if (currentPage > 1) {
-                renderGallery(--currentPage); 
-                window.scrollTo({top: 0, behavior: 'smooth'}); 
-            }
+            if (currentPage > 1) renderGallery(--currentPage); 
+            window.scrollTo({top: 0, behavior: 'smooth'}); 
         };
         document.getElementById("next-btn").onclick = () => { 
-            if (currentPage < Math.ceil(totalImages/imagesPerPage)) {
-                renderGallery(++currentPage); 
-                window.scrollTo({top: 0, behavior: 'smooth'}); 
-            }
+            if (currentPage < Math.ceil(totalImages/imagesPerPage)) renderGallery(++currentPage); 
+            window.scrollTo({top: 0, behavior: 'smooth'}); 
         };
 
         function closeModal() {
